@@ -1,21 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int **matrix = NULL;
 
 int main(int argc, char *argv[] ){
-	if (argc == 1) {
-		printf("un argumento");
+	if (argc == 2) {
+		if( ( !(strcmp(argv[1], "x")))) {
+			printf("Modo Experimental\n");
 
+		}else if ( ( !(strcmp(argv[1], "y")))){
+			printf("Modo  Cientifico\n");
+
+		}else{
+			printf("Error:Give a correct argument\n");
+		}
 
 
 	}else {
 
-		printf("Error" );
+		printf("Error: Too many arguments\n" );
 	}
-	/*int habitantesVivienda[5][25];
-	habitantesVivienda[3][24] = 4;
-	printf("El numero de personas que viven en la vivienda 24 del piso 3 es %d\n", habitantesVivienda[3][24]);*/
 
 	return 0; 
 	
