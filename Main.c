@@ -2,12 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+FILE *out;
 int **matrix = NULL;
+
+
+
+
 
 int main(int argc, char *argv[] ){
 	float x = 0 / 2;
 	srand(time(NULL));
+	
 	if (argc == 2) {
 		if( ( !(strcmp(argv[1], "x")))) {
 			printf("Modo Experimental\n");
@@ -38,7 +43,47 @@ int main(int argc, char *argv[] ){
 	return 0; 
 }
 
+void createOutFile()
+{
+	out = fopen ("salida.tex", "w");
+	
+}
+
+void writeHeader(){
+	fprintf(out,"\\documentclass[12]{beamer}\n");
+        fprintf(out,"\\usetheme{Oxygen}\n");
+	fprintf(out,"\\hypersetup{pdfpagemode=FullScreen}\n");
+	fprintf(out,"\\usepackage{thumbpdf}\n");
+	fprintf(out,"\\usepackage{wasysym}\n");
+	fprintf(out,"\\usepackage{ucs}\n");
+	fprintf(out,"\\usepackage[utf8]{inputenc}\n");
+	fprintf(out,"\\usepackage{verbatim}\n\n");
+	fprintf(out,"\\title{Proyecto 01}\n");
+	fprintf(out,"\\subtitle{Investigación de Operaciones}\n");
+	fprintf(out,"\\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}\n\n");
+	fprintf(out,"\\begin{document}\n");
+	fprintf(out,"\\frame{\\titlepage}\n");
+	fprintf(out,"\\section{Introducción}\n");
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{Introducción}\n");
+	
+	fprintf(out,"\\end{frame}\n");
+	
+}
+void makeBeamer(){
+	createOutFile();
+	writeHeader();
+	//system("evince salida/salida.pdf");
+	fprintf(out,"\\end{document}\n");
+
+}
+
+
+
+
+
 void basicGreedy(int bag_size, int items_value[], int items_size[]){
+	makeBeamer();
 	int bag_value = 0;
 	int temp_higher_value = 0;
 	int temp_size = 0;
