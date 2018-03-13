@@ -21,8 +21,8 @@ int main(int argc, char *argv[] ){
 			int items_value_2[6];
 			int items_size_2[6];
 			for (int i = 0; i < 6; i++) {
-				int rand_value = rand() % 21;
-				int rand_size = rand() % 8;
+				int rand_value = (rand() % 20) + 1;
+				int rand_size = (rand() % 7) + 1;
 				items_value[i] = rand_value;
 				items_size[i] = rand_size;
 				items_value_2[i] = rand_value;
@@ -51,7 +51,7 @@ void createOutFile()
 
 void writeHeader(){
 	fprintf(out,"\\documentclass[12]{beamer}\n");
-        fprintf(out,"\\usetheme{Oxygen}\n");
+    fprintf(out,"\\usetheme{Oxygen}\n");
 	fprintf(out,"\\hypersetup{pdfpagemode=FullScreen}\n");
 	fprintf(out,"\\usepackage{thumbpdf}\n");
 	fprintf(out,"\\usepackage{wasysym}\n");
@@ -97,6 +97,7 @@ void basicGreedy(int bag_size, int items_value[], int items_size[]){
 				temp_size = items_size[i];
 				temp_index = i;
 				space_available = true;
+				break;
 			}
 		}
 		if (space_available == true) {
@@ -122,18 +123,13 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[]) {
 	while (space_available) {
 		space_available = false;
 		for (int i = 0; i < 6; i++) {
-			//printf("%d,%d\n", items_value[i], items_size[i]);
-			if (items_size[i] == 0 && items_value[i] > temp_higher_proportion) {
-				temp_higher_proportion = items_value[i];
-				temp_size = items_size[i];
-				temp_index = i;
-				space_available = true;
-			} else if (items_value[i] > 0 && items_size[i] > 0){
+			if (items_value[i] > 0){
 				if ((items_value[i] / items_size[i]) > temp_higher_proportion && items_size[i] <= bag_size) {
 					temp_higher_proportion = items_value[i] / items_size[i];
 					temp_size = items_size[i];
 					temp_index = i;
 					space_available = true;
+					break;
 				}
 			}
 		}
