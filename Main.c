@@ -29,6 +29,7 @@ int main(int argc, char *argv[] ){
 				items_size_2[i] = rand_size;
 				printf("%d, %d\n", items_value[i], items_size[i]);
 			}
+			printf("%d\n", sizeof(items_value) / sizeof(int));
 			basicGreedy(15, items_value, items_size);
 			printf("\n%s\n", "------------------------------------------");
 			proportionalGreedy(15, items_value_2, items_size_2);
@@ -89,9 +90,10 @@ void basicGreedy(int bag_size, int items_value[], int items_size[]){
 	int temp_size = 0;
 	int temp_index;	
 	bool space_available = true;
+	int n = sizeof(items_value) / sizeof(int);
 	while (space_available) {
 		space_available = false;
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < n; i++) {
 			if (items_value[i] > temp_higher_value && items_size[i] <= bag_size) {
 				temp_higher_value = items_value[i];
 				temp_size = items_size[i];
@@ -115,6 +117,7 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[]) {
 	float temp_higher_proportion = 0;
 	int temp_size = 0;
 	int temp_index;	
+	int n = sizeof(items_value) / sizeof(int);
 	bool space_available = true;
 	for (int i = 0; i < 6; i++) {
 		printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
@@ -122,7 +125,7 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[]) {
 	printf("%s\n", "");
 	while (space_available) {
 		space_available = false;
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < n; i++) {
 			if (items_value[i] > 0){
 				if ((items_value[i] / items_size[i]) > temp_higher_proportion && items_size[i] <= bag_size) {
 					temp_higher_proportion = items_value[i] / items_size[i];
