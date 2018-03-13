@@ -35,6 +35,7 @@ int main(int argc, char *argv[] ){
 			proportionalGreedy(15, items_value_2, items_size_2);
 		}else if ( ( !(strcmp(argv[1], "y")))){
 			printf("Modo  Cientifico\n");
+			dinamicExample();
 		}else{
 			printf("Error:Give a correct argument\n");
 		}
@@ -47,7 +48,6 @@ int main(int argc, char *argv[] ){
 void createOutFile()
 {
 	out = fopen ("salida.tex", "w");
-	
 }
 
 void writeHeader(){
@@ -67,10 +67,10 @@ void writeHeader(){
 	fprintf(out,"\\section{Introducción}\n");
 	fprintf(out,"\\begin{frame}\n");
 	fprintf(out,"\\frametitle{Introducción}\n");
-	
+
 	fprintf(out,"\\end{frame}\n");
-	
 }
+
 void makeBeamer(){
 	createOutFile();
 	writeHeader();
@@ -78,10 +78,6 @@ void makeBeamer(){
 	fprintf(out,"\\end{document}\n");
 
 }
-
-
-
-
 
 void basicGreedy(int bag_size, int items_value[], int items_size[]){
 	makeBeamer();
@@ -144,4 +140,80 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[]) {
 			temp_higher_proportion = 0;
 		}	
 	}
+}
+
+void dinamicExample() {
+	srand(time(NULL));
+	int items_value[7];
+	int items_size[7];
+	items_value[0] = 7;
+	items_value[1] = 9;
+	items_value[2] = 5;
+	items_value[3] = 12;
+	items_value[4] = 14;
+	items_value[5] = 6;
+	items_value[6] = 12;
+	items_size[0] = 3;
+	items_size[1] = 4;
+	items_size[2] = 2;
+	items_size[3] = 6;
+	items_size[4] = 7;
+	items_size[5] = 3;
+	items_size[6] = 5;
+
+	/*for (int i = 0; i < 10; i++) {
+		items_value[i] = (rand() % 100) + 1;
+		items_size[i] = (rand() % 40) + 1;
+		printf("%d, %d\n", items_value[i], items_size[i]);
+	}*/
+	int **p;
+  	int i, j;
+  	int m = 16;
+  	int n = 7;
+  	p = malloc(sizeof(float *) * m); /* Row pointers */
+	for(i = 0; i < m; i++) {
+		p[i] =  malloc(sizeof(float) * n); /* Rows */
+	}
+
+	/* Assign values to array elements and print them */
+  	/*for(i = 0; i < m; i++) {
+	    for(j = 0; j < n; j++) {
+	      p[i][j] = (i * 10) + (j + 1);
+	      printf("%6d",p[i][j]);
+	    }
+	    printf("\n");
+    }*/
+    for (j = 0; j < n; j++) {
+    	for (i = 0; i < m; i++) {
+    		if (items_size[j] <= i) {
+    			if (j == 0) {
+    				p[i][j] = items_value[j];
+    			} else if (j > 0 && items_value[j] + p[i - items_size[j]][j-1] >= p[i][j-1]){
+    				p[i][j] = items_value[j] + p[i - items_size[j]][j-1];
+    			} else {
+    				p[i][j] = p[i][j-1];
+    			} 
+    		} else if (j > 0){
+    			p[i][j] = p[i][j-1];
+    		} else {
+    			p[i][j] = 0;
+    		}
+    	}
+    }
+
+    for(i = 0; i < m; i++) {
+	    for(j = 0; j < n; j++) {
+	      printf("%6d",p[i][j]);
+	    }
+	    printf("\n");
+    }
+
+
+
+    /* Deallocate memory */
+  	for(i = 0; i < m; i++) {
+	    free(p[i]); /* Rows */
+	}
+	free(p); /* Row pointers */
+
 }
