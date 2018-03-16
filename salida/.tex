@@ -1,0 +1,134 @@
+\documentclass[12]{beamer}
+\usetheme{Oxygen}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{thumbpdf}
+\usepackage{wasysym}
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+
+\title{Proyecto 04 }
+\subtitle{Compiladores e intérpretes}
+\author{Luis Daniel Cordero, Mario Chinchilla Toruño y Luis Diego Vargas Arroyo}
+
+\begin{document}
+\frame{\titlepage}
+\section{Introducción}
+\begin{frame}
+  \frametitle{Introducción}
+\end{frame}
+\begin{frame}[allowframebreaks,fragile]{Errores}
+\verb@F@\verb@a@\verb@l@\verb@t@\verb@a@\verb@ @\verb@'@\verb@;@\verb@'@\verb@ @\verb@s@\verb@e@\verb@ @\verb@e@\verb@n@\verb@c@\verb@o@\verb@n@\verb@t@\verb@r@\verb@o@\verb@ @\verb@'@\verb@}@\verb@'@\verb@ @\verb@l@\verb@i@\verb@n@\verb@e@\verb@a@\verb@:@\verb@6@\verb@ @\verb@c@\verb@o@\verb@l@\verb@u@\verb@m@\verb@n@\verb@a@\verb@:@\verb@2@ \\ \verb@F@\verb@a@\verb@l@\verb@t@\verb@a@\verb@ @\verb@e@\verb@x@\verb@p@\verb@r@\verb@e@\verb@s@\verb@i@\verb@o@\verb@n@\verb@ @\verb@s@\verb@e@\verb@ @\verb@e@\verb@n@\verb@c@\verb@o@\verb@n@\verb@t@\verb@r@\verb@o@\verb@ @\verb@'@\verb@x@\verb@'@\verb@ @\verb@l@\verb@i@\verb@n@\verb@e@\verb@a@\verb@:@\verb@1@\verb@3@\verb@ @\verb@C@\verb@o@\verb@l@\verb@u@\verb@m@\verb@n@\verb@a@\verb@:@\verb@1@\verb@4@\verb@;@ \\ \verb@E@\verb@r@\verb@r@\verb@o@\verb@r@\verb@ @\verb@e@\verb@n@\verb@ @\verb@l@\verb@a@\verb@ @\verb@e@\verb@x@\verb@p@\verb@r@\verb@e@\verb@s@\verb@i@\verb@o@\verb@n@\verb@ @\verb@'@\verb@}@\verb@'@\verb@ @\verb@l@\verb@i@\verb@n@\verb@e@\verb@a@\verb@:@\verb@1@\verb@4@\verb@ @\verb@C@\verb@o@\verb@l@\verb@u@\verb@m@\verb@n@\verb@a@\verb@:@\verb@1@\verb@3@ \\  \\ 
+\end{frame}
+\begin{frame}[allowframebreaks,fragile]{Codigo}
+\verb@#@\verb@d@\verb@e@\verb@f@\verb@i@\verb@n@\verb@e@\verb@/@\verb@*@\verb@*@\verb@/@\verb@A@\verb@l@\verb@a@\verb@n@\verb@/@\verb@*@\verb@*@\verb@/@\verb@(@\verb@f@\verb@f@\verb@l@\verb@u@\verb@s@\verb@h@\verb@(@\verb@0@\verb@)@\verb@,@\verb@j@\verb@=@\verb@c@\verb@=@\verb@0@\verb@;@\verb@+@\verb@+@\verb@c@\verb@<@\verb@b@\verb@[@\verb@6@\verb@]@\verb@+@\verb@7@\verb@;@\verb@v@\verb@=@\verb@b@\verb@[@\verb@c@\verb@]@\verb@^@\verb@(@\verb@b@\verb@[@\verb@c@\verb@+@ 
+
+\verb@c@\verb@h@\verb@a@\verb@r@\verb@*@\verb@H@\verb@=@\verb@"@\verb@c@\verb@l@\verb@o@\verb@s@\verb@e@\verb@\@\verb@r@\verb@\@\verb@n@\verb@C@\verb@o@\verb@n@\verb@t@\verb@e@\verb@n@\verb@t@\verb@-@\verb@T@\verb@y@\verb@p@\verb@e@\verb@:@\verb@t@\verb@e@\verb@x@\verb@t@\verb@/@\verb@h@\verb@t@\verb@m@\verb@l@\verb@\@\verb@r@\verb@\@\verb@n@\verb@\@\verb@r@\verb@\@\verb@n@\verb@<@\verb@c@\verb@a@\verb@n@\verb@v@\verb@a@\verb@s@\verb@ @\verb@i@\verb@d@\verb@=@\verb@\@ 
+
+\verb@'@\verb@c@\verb@'@\verb@w@\verb@i@\verb@d@\verb@t@\verb@h@\verb@=@\verb@'@\verb@1@\verb@2@\verb@8@\verb@'@\verb@h@\verb@e@\verb@i@\verb@g@\verb@h@\verb@t@\verb@=@\verb@'@\verb@1@\verb@2@\verb@8@\verb@'@\verb@s@\verb@t@\verb@y@\verb@l@\verb@e@\verb@=@\verb@'@\verb@w@\verb@i@\verb@d@\verb@t@\verb@h@\verb@:@\verb@2@\verb@5@\verb@6@\verb@p@\verb@x@\verb@;@\verb@h@\verb@e@\verb@i@\verb@g@\verb@h@\verb@t@\verb@:@\verb@2@\verb@5@\verb@6@\verb@p@\verb@x@\verb@'@\verb@\@ 
+
+\verb@>@\verb@<@\verb@s@\verb@c@\verb@r@\verb@i@\verb@p@\verb@t@\verb@>@\verb@x@\verb@=@\verb@y@\verb@=@\verb@-@\verb@1@\verb@;@\verb@v@\verb@=@\verb@w@\verb@i@\verb@n@\verb@d@\verb@o@\verb@w@\verb@.@\verb@c@\verb@;@\verb@v@\verb@.@\verb@o@\verb@n@\verb@m@\verb@o@\verb@u@\verb@s@\verb@e@\verb@m@\verb@o@\verb@v@\verb@e@\verb@=@\verb@f@\verb@u@\verb@n@\verb@c@\verb@t@\verb@i@\verb@o@\verb@n@\verb@(@\verb@e@\verb@)@\verb@{@\verb@x@\verb@=@\verb@e@\verb@.@\verb@p@\verb@\@ 
+
+\verb@a@\verb@g@\verb@e@\verb@X@\verb@-@\verb@v@\verb@.@\verb@o@\verb@f@\verb@f@\verb@s@\verb@e@\verb@t@\verb@L@\verb@e@\verb@f@\verb@t@\verb@;@\verb@y@\verb@=@\verb@e@\verb@.@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@p@\verb@a@\verb@g@\verb@e@\verb@Y@\verb@-@\verb@v@\verb@.@\verb@o@\verb@f@\verb@f@\verb@s@\verb@e@\verb@t@\verb@T@\verb@o@\verb@p@\verb@}@\verb@;@\verb@w@\verb@=@\verb@\@ 
+
+\verb@n@\verb@e@\verb@w@\verb@ @\verb@W@\verb@e@\verb@b@\verb@S@\verb@o@\verb@c@\verb@k@\verb@e@\verb@t@\verb@(@\verb@'@\verb@w@\verb@s@\verb@'@\verb@+@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@l@\verb@o@\verb@c@\verb@a@\verb@t@\verb@i@\verb@o@\verb@n@\verb@.@\verb@h@\verb@r@\verb@e@\verb@f@\verb@.@\verb@s@\verb@u@\verb@b@\verb@s@\verb@\@ 
+
+\verb@t@\verb@r@\verb@(@\verb@4@\verb@)@\verb@)@\verb@;@\verb@w@\verb@.@\verb@b@\verb@i@\verb@n@\verb@a@\verb@r@\verb@y@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@T@\verb@y@\verb@p@\verb@e@\verb@=@\verb@'@\verb@a@\verb@r@\verb@r@\verb@a@\verb@y@\verb@b@\verb@u@\verb@f@\verb@f@\verb@\@ 
+
+\verb@e@\verb@r@\verb@'@\verb@;@\verb@w@\verb@.@\verb@o@\verb@n@\verb@m@\verb@e@\verb@s@\verb@s@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@a@\verb@g@\verb@e@\verb@=@\verb@f@\verb@u@\verb@n@\verb@c@\verb@t@\verb@i@\verb@o@\verb@n@\verb@(@\verb@\@ 
+
+\verb@e@\verb@)@\verb@{@\verb@c@\verb@=@\verb@v@\verb@.@\verb@g@\verb@e@\verb@t@\verb@C@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@o@\verb@n@\verb@t@\verb@e@\verb@x@\verb@t@\verb@(@\verb@'@\verb@2@\verb@d@\verb@'@\verb@)@\verb@\@ 
+
+\verb@;@\verb@b@\verb@=@\verb@c@\verb@.@\verb@c@\verb@r@\verb@e@\verb@a@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@t@\verb@e@\verb@I@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@m@\verb@a@\verb@g@\verb@e@\verb@D@\verb@a@\verb@t@\verb@a@\verb@(@\verb@1@\verb@2@\verb@\@ 
+
+\verb@8@\verb@,@\verb@1@\verb@2@\verb@8@\verb@)@\verb@;@\verb@u@\verb@=@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@n@\verb@e@\verb@w@\verb@ @\verb@U@\verb@i@\verb@n@\verb@t@\verb@8@\verb@A@\verb@r@\verb@r@\verb@a@\verb@y@\verb@(@\verb@d@\verb@=@\verb@e@\verb@.@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@d@\verb@a@\verb@t@\verb@a@\verb@)@\verb@;@\verb@b@\verb@.@\verb@d@\verb@a@\verb@t@\verb@\@ 
+
+\verb@a@\verb@.@\verb@s@\verb@e@\verb@t@\verb@(@\verb@u@\verb@)@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@;@\verb@c@\verb@.@\verb@p@\verb@u@\verb@t@\verb@I@\verb@m@\verb@a@\verb@g@\verb@e@\verb@D@\verb@a@\verb@t@\verb@a@\verb@(@\verb@b@\verb@,@\verb@0@\verb@,@\verb@0@\verb@)@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@;@\verb@u@\verb@[@\verb@0@\verb@]@\verb@=@\verb@x@\verb@/@\verb@2@\verb@;@\verb@\@ 
+
+\verb@u@\verb@[@\verb@1@\verb@]@\verb@=@\verb@y@\verb@/@\verb@2@\verb@ @\verb@ @\verb@ @\verb@ @\verb@;@\verb@w@\verb@.@\verb@s@\verb@e@\verb@n@\verb@d@\verb@(@\verb@d@\verb@.@\verb@s@\verb@l@\verb@i@\verb@c@\verb@e@\verb@(@\verb@0@\verb@,@\verb@x@\verb@<@\verb@0@\verb@?@\verb@0@\verb@:@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@2@\verb@)@\verb@)@\verb@;@\verb@x@\verb@=@\verb@y@\verb@=@\verb@-@\verb@\@ 
+
+\verb@1@\verb@}@\verb@<@\verb@/@\verb@s@\verb@c@\verb@r@\verb@"@\verb@ @\verb@ @\verb@ @\verb@"@\verb@i@\verb@p@\verb@t@\verb@>@\verb@"@\verb@,@\verb@b@\verb@[@\verb@9@\verb@9@\verb@9@\verb@9@\verb@]@\verb@;@\verb@f@\verb@l@\verb@o@\verb@a@\verb@t@\verb@*@\verb@e@\verb@,@\verb@d@\verb@[@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@6@\verb@5@\verb@5@\verb@3@\verb@6@\verb@]@\verb@,@\verb@u@\verb@,@\verb@v@ 
+
+\verb@,@\verb@l@\verb@u@\verb@,@\verb@l@\verb@v@\verb@,@\verb@ @\verb@ @\verb@ @\verb@ @\verb@z@\verb@;@\verb@v@\verb@o@\verb@i@\verb@d@\verb@*@\verb@f@\verb@;@\verb@t@\verb@y@\verb@p@\verb@e@\verb@d@\verb@e@\verb@f@\verb@ @\verb@u@\verb@n@\verb@s@\verb@i@\verb@g@\verb@n@\verb@e@\verb@d@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@l@\verb@o@\verb@n@\verb@g@\verb@ @\verb@l@\verb@o@\verb@n@\verb@g@ 
+
+\verb@l@\verb@;@\verb@l@\verb@*@\verb@p@\verb@,@\verb@t@\verb@[@\verb@ @\verb@ @\verb@9@\verb@9@\verb@]@\verb@=@\verb@{@\verb@0@\verb@x@\verb@6@\verb@7@\verb@4@\verb@5@\verb@2@\verb@3@\verb@0@\verb@1@\verb@,@\verb@0@\verb@x@\verb@E@\verb@F@\verb@C@\verb@D@\verb@A@\verb@B@\verb@8@\verb@9@\verb@,@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@0@\verb@x@\verb@9@\verb@8@\verb@B@\verb@A@\verb@D@\verb@C@\verb@F@\verb@E@ 
+
+\verb@,@\verb@3@\verb@0@\verb@8@\verb@4@\verb@3@\verb@8@\verb@*@\verb@ @\verb@ @\verb@8@\verb@8@\verb@1@\verb@,@\verb@3@\verb@2@\verb@8@\verb@5@\verb@3@\verb@7@\verb@7@\verb@5@\verb@2@\verb@0@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@}@\verb@,@\verb@i@\verb@,@\verb@j@\verb@,@\verb@k@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@,@\verb@n@\verb@,@\verb@m@\verb@[@\verb@2@\verb@0@\verb@4@\verb@]@\verb@;@ 
+
+\verb@#@\verb@i@\verb@n@\verb@c@\verb@l@\verb@u@\verb@d@\verb@e@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@/@\verb@*@\verb@i@\verb@o@\verb@*@\verb@/@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@<@\verb@s@\verb@t@\verb@d@\verb@i@\verb@o@\verb@.@\verb@h@\verb@>@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@/@\verb@*@\verb@t@\verb@u@\verb@r@\verb@i@\verb@n@\verb@g@\verb@*@\verb@/@ 
+
+\verb@v@\verb@o@\verb@i@\verb@d@\verb@ @\verb@s@\verb@(@\verb@)@\verb@{@\verb@ @\verb@ @\verb@;@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@f@\verb@o@\verb@r@\verb@(@\verb@ @\verb@ @\verb@k@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@=@\verb@0@\verb@;@\verb@k@\verb@+@\verb@+@\verb@<@\verb@7@\verb@ @\verb@*@\verb@ @\verb@ @\verb@2@\verb@ @\verb@ @\verb@*@\verb@9@\verb@;@\verb@)@\verb@f@\verb@o@\verb@r@\verb@(@\verb@i@\verb@=@ 
+
+\verb@0@\verb@;@\verb@+@\verb@+@\verb@i@\verb@<@\verb@1@\verb@2@\verb@7@\verb@;@\verb@ @\verb@)@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@e@\verb@=@\verb@d@\verb@ @\verb@+@\verb@ @\verb@ @\verb@i@\verb@*@\verb@ @\verb@4@\verb@ @\verb@ @\verb@ @\verb@+@\verb@5@\verb@1@\verb@2@\verb@*@\verb@k@\verb@,@\verb@1@\verb@[@\verb@e@\verb@]@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@+@\verb@=@\verb@(@\verb@i@\verb@-@\verb@u@\verb@)@\verb@*@\verb@(@\verb@i@ 
+
+\verb@-@\verb@u@\verb@)@\verb@+@\verb@(@\verb@k@\verb@-@\verb@v@\verb@)@\verb@*@\verb@ @\verb@(@\verb@k@\verb@-@\verb@ @\verb@v@\verb@ @\verb@ @\verb@)@\verb@<@\verb@2@\verb@0@\verb@?@\verb@*@\verb@e@\verb@+@\verb@=@\verb@U@\verb@V@\verb@_@\verb@D@\verb@R@\verb@O@\verb@P@\verb@:@\verb@0@\verb@;@\verb@}@\verb@l@\verb@*@\verb@q@\verb@=@\verb@ @\verb@ @\verb@m@\verb@,@\verb@ @\verb@ @\verb@ @\verb@g@\verb@=@\verb@1@\verb@L@\verb@L@\verb@<@\verb@<@\verb@3@\verb@2@\verb@;@ 
+
+\verb@l@\verb@(@\verb@h@\verb@)@\verb@(@\verb@l@\verb@ @\verb@v@\verb@,@\verb@l@\verb@ @\verb@(@\verb@a@\verb@)@\verb@)@\verb@{@\verb@ @\verb@r@\verb@e@\verb@t@\verb@u@\verb@r@\verb@n@\verb@(@\verb@v@\verb@<@\verb@<@\verb@a@\verb@)@\verb@|@\verb@(@\verb@v@\verb@%@\verb@g@\verb@>@\verb@>@\verb@(@\verb@3@\verb@2@\verb@-@\verb@a@\verb@ @\verb@ @\verb@ @\verb@ @\verb@)@\verb@ @\verb@ @\verb@)@\verb@;@\verb@}@\verb@i@\verb@n@\verb@t@\verb@ @\verb@m@\verb@a@\verb@i@\verb@n@ 
+
+\verb@(@\verb@i@\verb@n@\verb@t@\verb@ @\verb@c@\verb@/@\verb@*@\verb@h@\verb@a@\verb@ @\verb@r@\verb@*@\verb@/@\verb@,@\verb@ @\verb@ @\verb@c@\verb@h@\verb@a@\verb@r@\verb@*@\verb@*@\verb@y@\verb@)@\verb@{@\verb@f@\verb@o@\verb@r@\verb@(@\verb@e@\verb@=@\verb@d@\verb@;@\verb@f@\verb@g@\verb@e@\verb@t@\verb@s@\verb@(@\verb@b@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@,@\verb@m@\verb@[@\verb@9@\verb@7@\verb@]@\verb@=@\verb@4@\verb@8@\verb@0@\verb@,@\verb@\@ 
+
+\verb@s@\verb@t@\verb@d@\verb@i@\verb@n@\verb@)@\verb@&@\verb@&@\verb@*@\verb@b@\verb@ @\verb@>@\verb@3@\verb@1@\verb@;@\verb@ @\verb@ @\verb@)@\verb@f@\verb@o@\verb@r@\verb@(@\verb@ @\verb@i@\verb@=@\verb@j@\verb@=@\verb@0@\verb@;@\verb@n@\verb@=@\verb@b@\verb@[@\verb@i@\verb@]@\verb@,@\verb@i@\verb@<@\verb@1@\verb@8@\verb@ @\verb@ @\verb@ @\verb@?@\verb@ @\verb@ @\verb@(@\verb@l@\verb@)@\verb@"@\verb@s@\verb@e@\verb@c@\verb@-@\verb@w@\verb@e@\verb@b@\verb@s@\verb@\@ 
+
+\verb@o@\verb@c@\verb@k@\verb@e@\verb@t@\verb@-@\verb@k@\verb@e@\verb@y@\verb@:@\verb@ @\verb@"@\verb@[@\verb@i@\verb@]@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@=@\verb@=@\verb@(@\verb@n@\verb@|@\verb@3@\verb@2@\verb@)@\verb@:@\verb@n@\verb@-@\verb@3@\verb@2@\verb@?@\verb@ @\verb@m@\verb@[@\verb@j@\verb@/@\verb@4@\verb@]@\verb@ @\verb@ @\verb@|@\verb@=@\verb@(@\verb@j@\verb@<@\verb@ @\verb@2@\verb@4@\verb@?@\verb@n@\verb@:@\verb@(@\verb@l@\verb@)@ 
+
+\verb@"@\verb@2@\verb@5@\verb@8@\verb@E@\verb@A@\verb@F@\verb@A@\verb@5@\verb@-@\verb@"@\verb@ @\verb@"@\verb@E@\verb@9@\verb@1@\verb@4@\verb@-@\verb@4@\verb@7@\verb@D@\verb@A@\verb@-@\verb@9@\verb@5@\verb@C@\verb@A@\verb@-@\verb@C@\verb@5@\verb@A@\verb@B@\verb@0@\verb@D@\verb@C@\verb@8@\verb@5@\verb@B@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@1@\verb@1@\verb@\@\verb@x@\verb@8@\verb@0@\verb@"@\verb@[@\verb@j@\verb@-@\verb@2@\verb@4@\verb@]@\verb@)@ 
+
+\verb@<@\verb@<@\verb@(@\verb@3@\verb@-@\verb@j@\verb@%@\verb@4@\verb@)@\verb@*@\verb@8@\verb@ @\verb@,@\verb@+@\verb@+@\verb@j@\verb@<@\verb@6@\verb@1@\verb@:@\verb@1@\verb@;@\verb@)@\verb@i@\verb@+@\verb@+@\verb@;@\verb@f@\verb@o@\verb@r@\verb@(@\verb@j@\verb@=@\verb@3@\verb@;@\verb@-@\verb@-@\verb@j@\verb@;@\verb@ @\verb@ @\verb@ @\verb@ @\verb@)@\verb@{@\verb@f@\verb@o@\verb@r@\verb@(@\verb@i@\verb@=@\verb@4@\verb@;@\verb@+@\verb@+@\verb@i@\verb@<@\verb@7@\verb@4@ 
+
+\verb@;@\verb@)@\verb@i@\verb@>@\verb@9@\verb@?@\verb@p@\verb@=@\verb@q@\verb@+@\verb@i@\verb@-@\verb@ @\verb@2@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@,@\verb@p@\verb@[@\verb@8@\verb@]@\verb@=@\verb@h@\verb@(@\verb@p@\verb@[@\verb@5@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@]@\verb@^@\verb@*@\verb@p@\verb@^@\verb@p@\verb@[@\verb@-@\verb@6@\verb@]@\verb@^@\verb@p@\verb@[@\verb@-@\verb@8@\verb@]@ 
+
+\verb@#@\verb@d@\verb@e@\verb@f@\verb@i@\verb@n@\verb@e@\verb@/@\verb@*@\verb@h@\verb@a@\verb@h@\verb@ @\verb@ @\verb@a@\verb@h@\verb@a@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@<@\verb@-@\verb@-@\verb@m@\verb@o@\verb@u@\verb@t@\verb@h@\verb@*@\verb@/@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@l@\verb@a@\verb@p@\verb@l@\verb@a@\verb@c@\verb@i@\verb@a@\verb@n@\verb@(@\verb@u@\verb@)@\verb@l@\verb@#@\verb@#@\verb@u@ 
+
+\verb@,@\verb@1@\verb@)@\verb@:@\verb@(@\verb@t@\verb@[@\verb@i@\verb@]@\verb@=@\verb@t@\verb@[@\verb@9@\verb@ @\verb@-@\verb@i@\verb@]@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@)@\verb@;@\verb@f@\verb@o@\verb@r@\verb@(@\verb@p@\verb@=@\verb@t@\verb@+@\verb@7@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@,@\verb@i@\verb@=@\verb@-@\verb@1@\verb@;@\verb@+@\verb@+@\verb@i@\verb@<@\verb@8@\verb@2@\verb@;@\verb@k@ 
+
+\verb@=@\verb@*@\verb@p@\verb@+@\verb@+@\verb@,@\verb@p@\verb@[@\verb@2@\verb@]@\verb@=@\verb@h@\verb@(@\verb@p@\verb@[@\verb@1@\verb@]@\verb@,@\verb@5@\verb@)@\verb@ @\verb@ @\verb@ @\verb@+@\verb@p@\verb@[@\verb@-@\verb@3@\verb@]@\verb@+@\verb@n@\verb@+@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@(@\verb@i@\verb@/@\verb@+@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@2@\verb@0@\verb@%@\verb@2@\verb@?@\verb@*@\verb@p@\verb@^@\verb@k@\verb@^@\verb@p@\verb@[@\verb@-@ 
+
+\verb@2@\verb@]@\verb@:@\verb@(@\verb@*@\verb@p@\verb@&@\verb@k@\verb@)@\verb@|@\verb@(@\verb@(@\verb@i@\verb@<@\verb@ @\verb@2@\verb@0@\verb@?@\verb@~@\verb@*@\verb@p@\verb@:@\verb@*@\verb@p@\verb@|@\verb@k@\verb@)@\verb@&@\verb@p@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@[@\verb@-@\verb@2@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@]@\verb@)@\verb@)@\verb@+@\verb@*@\verb@q@\verb@+@\verb@+@\verb@,@\verb@t@\verb@[@\verb@+@ 
+
+\verb@8@\verb@1@\verb@-@\verb@i@\verb@]@\verb@+@\verb@=@\verb@(@\verb@i@\verb@>@\verb@7@\verb@6@\verb@)@\verb@*@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@(@\verb@*@\verb@ @\verb@p@\verb@=@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@h@\verb@(@\verb@*@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@p@\verb@,@\verb@3@\verb@0@\verb@*@\verb@(@\verb@i@\verb@<@\verb@8@\verb@0@\verb@)@ 
+
+\verb@)@\verb@)@\verb@)@\verb@f@\verb@o@\verb@r@\verb@(@\verb@;@\verb@n@\verb@-@\verb@k@\verb@;@\verb@n@\verb@=@\verb@(@\verb@(@\verb@(@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@1@\verb@L@\verb@L@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@+@\verb@(@\verb@9@\verb@<@\verb@<@\verb@i@\verb@/@\verb@2@\verb@0@ 
+
+\verb@)@\verb@/@\verb@8@\verb@)@\verb@<@\verb@<@\verb@6@\verb@0@\verb@)@\verb@/@\verb@k@\verb@+@\verb@k@\verb@)@\verb@/@\verb@2@\verb@)@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@k@\verb@=@\verb@n@\verb@ @\verb@ @\verb@ @\verb@;@\verb@}@\verb@ @\verb@ @\verb@f@\verb@o@\verb@r@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@(@\verb@i@\verb@ @\verb@=@\verb@0@\verb@;@\verb@i@\verb@<@\verb@5@\verb@7@\verb@;@ 
+
+\verb@i@\verb@+@\verb@+@\verb@)@\verb@i@\verb@<@\verb@3@\verb@0@\verb@?@\verb@q@\verb@[@\verb@i@\verb@%@\verb@5@\verb@*@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@1@\verb@6@\verb@/@\verb@ @\verb@ @\verb@ @\verb@3@\verb@+@\verb@ @\verb@ @\verb@ @\verb@i@\verb@/@\verb@5@\verb@]@\verb@ @\verb@ @\verb@ @\verb@|@\verb@=@\verb@t@\verb@[@\verb@i@\verb@%@\verb@5@\verb@]@\verb@%@\verb@g@\verb@<@\verb@<@\verb@4@ 
+
+\verb@>@\verb@>@\verb@(@\verb@3@\verb@0@\verb@+@\verb@i@\verb@%@\verb@5@\verb@%@\verb@3@\verb@*@\verb@2@\verb@-@\verb@i@\verb@/@\verb@5@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@*@\verb@6@\verb@)@\verb@&@\verb@ @\verb@ @\verb@ @\verb@6@\verb@3@\verb@,@\verb@0@\verb@ @\verb@ @\verb@ @\verb@ @\verb@:@\verb@(@\verb@n@\verb@ @\verb@ @\verb@ @\verb@=@\verb@*@\verb@q@\verb@+@\verb@+@\verb@,@\verb@b@\verb@[@\verb@i@\verb@-@\verb@3@\verb@0@\verb@]@\verb@=@ 
+
+\verb@n@\verb@<@\verb@6@\verb@2@\verb@?@\verb@n@\verb@-@\verb@3@\verb@7@\verb@+@\verb@"@\verb@f@\verb@l@\verb@!@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@[@\verb@n@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@/@\verb@2@\verb@6@\verb@]@\verb@:@\verb@n@\verb@ @\verb@ @\verb@ @\verb@ @\verb@*@\verb@4@\verb@-@\verb@ @\verb@ @\verb@ @\verb@ @\verb@2@\verb@0@\verb@5@\verb@)@\verb@;@\verb@f@\verb@o@\verb@r@\verb@(@\verb@p@\verb@r@\verb@i@\verb@n@\verb@\@ 
+
+\verb@t@\verb@f@\verb@(@\verb@"@\verb@H@\verb@T@\verb@T@\verb@P@\verb@/@\verb@1@\verb@.@\verb@1@\verb@ @\verb@"@\verb@/@\verb@*@\verb@ @\verb@ @\verb@ @\verb@ @\verb@|@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@*@\verb@/@\verb@"@\verb@%@\verb@d@\verb@ @\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@O@\verb@K@\verb@\@\verb@r@\verb@\@\verb@n@\verb@C@\verb@o@\verb@n@\verb@n@\verb@e@\verb@c@\verb@t@\verb@i@\verb@\@ 
+
+\verb@o@\verb@n@\verb@:@\verb@%@\verb@s@\verb@%@\verb@.@\verb@2@\verb@7@\verb@s@\verb@=@\verb@\@\verb@r@\verb@\@\verb@n@\verb@\@\verb@r@\verb@\@\verb@n@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@,@\verb@1@\verb@0@\verb@1@\verb@ @\verb@ @\verb@ @\verb@+@\verb@9@\verb@9@\verb@*@\verb@!@\verb@ @\verb@ @\verb@*@\verb@m@\verb@,@\verb@!@\verb@*@\verb@m@\verb@?@\verb@H@\verb@:@\verb@"@\verb@u@\verb@p@\verb@g@\verb@r@\verb@a@\verb@d@\verb@e@\verb@\@ 
+
+\verb@\@\verb@r@\verb@\@\verb@n@\verb@U@\verb@p@\verb@g@\verb@r@\verb@a@\verb@d@\verb@e@\verb@:@\verb@w@\verb@e@\verb@b@\verb@s@\verb@o@\verb@"@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@"@\verb@c@\verb@"@\verb@ @\verb@ @\verb@ @\verb@"@\verb@k@\verb@e@\verb@t@\verb@\@\verb@r@\verb@\@\verb@n@\verb@S@\verb@e@\verb@c@\verb@-@\verb@W@\verb@e@\verb@b@\verb@S@\verb@o@\verb@c@\verb@k@\verb@e@\verb@t@\verb@-@\verb@A@\verb@c@\verb@c@\verb@e@\verb@\@ 
+
+\verb@p@\verb@t@\verb@:@\verb@"@\verb@,@\verb@b@\verb@)@\verb@;@\verb@e@\verb@-@\verb@d@\verb@<@\verb@6@\verb@5@\verb@5@\verb@3@\verb@6@\verb@ @\verb@;@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@e@\verb@+@\verb@=@\verb@ @\verb@ @\verb@4@\verb@)@\verb@e@\verb@[@\verb@1@\verb@]@\verb@=@\verb@(@\verb@*@\verb@e@\verb@=@\verb@U@\verb@V@\verb@_@\verb@B@\verb@A@\verb@C@\verb@K@\verb@G@\verb@R@\verb@O@\verb@U@\verb@N@\verb@D@\verb@)@\verb@;@\verb@f@\verb@o@\verb@r@ 
+
+\verb@(@\verb@;@\verb@*@\verb@m@\verb@;@\verb@c@\verb@=@\verb@0@\verb@)@\verb@{@\verb@f@\verb@o@\verb@r@\verb@(@\verb@f@\verb@=@\verb@ @\verb@c@\verb@<@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@2@\verb@ @\verb@ @\verb@?@\verb@0@\verb@:@\verb@f@\verb@o@\verb@p@\verb@e@\verb@n@\verb@(@\verb@y@\verb@[@\verb@1@\verb@]@\verb@,@\verb@"@\verb@r@\verb@"@\verb@)@\verb@;@\verb@f@\verb@&@\verb@&@\verb@f@\verb@s@\verb@c@\verb@a@\verb@n@\verb@f@\verb@(@\verb@f@\verb@,@ 
+
+\verb@"@\verb@%@\verb@f@\verb@,@\verb@%@\verb@f@\verb@,@\verb@"@\verb@,@\verb@&@\verb@u@\verb@,@\verb@&@\verb@v@\verb@)@\verb@>@\verb@0@\verb@;@\verb@)@\verb@s@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@(@\verb@)@\verb@;@\verb@f@\verb@o@\verb@r@\verb@(@\verb@;@\verb@j@\verb@<@\verb@S@\verb@P@\verb@E@\verb@E@\verb@D@\verb@*@\verb@4@\verb@;@\verb@j@\verb@+@\verb@=@\verb@2@\verb@)@\verb@f@\verb@o@\verb@r@\verb@(@\verb@i@\verb@=@\verb@0@\verb@;@\verb@i@\verb@<@ 
+
+\verb@6@\verb@3@\verb@5@\verb@0@\verb@4@\verb@;@\verb@e@\verb@+@\verb@=@\verb@5@\verb@-@\verb@j@\verb@%@\verb@4@\verb@*@\verb@2@\verb@,@\verb@z@\verb@=@\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@T@\verb@I@\verb@M@\verb@E@\verb@S@\verb@T@\verb@E@\verb@P@\verb@,@\verb@*@\verb@e@\verb@=@\verb@u@\verb@+@\verb@z@\verb@*@\verb@(@\verb@e@\verb@l@\verb@t@\verb@a@\verb@_@\verb@u@\verb@)@\verb@,@\verb@e@\verb@[@\verb@1@\verb@]@\verb@=@\verb@v@\verb@+@\verb@z@\verb@*@ 
+
+\verb@(@\verb@e@\verb@l@\verb@t@\verb@a@\verb@_@\verb@v@\verb@)@\verb@,@\verb@i@\verb@+@\verb@=@\verb@4@\verb@)@\verb@f@\verb@o@\verb@r@\verb@(@\verb@c@\verb@=@\verb@ @\verb@ @\verb@0@\verb@;@\verb@c@\verb@+@\verb@2@\verb@;@\verb@u@\verb@=@\verb@v@\verb@,@\verb@v@\verb@=@\verb@e@\verb@[@\verb@4@\verb@]@\verb@,@\verb@l@\verb@u@\verb@=@\verb@l@\verb@v@\verb@,@\verb@l@\verb@v@\verb@=@\verb@e@\verb@[@\verb@-@\verb@5@\verb@0@\verb@8@\verb@]@\verb@+@\verb@*@\verb@e@\verb@+@ 
+
+\verb@e@\verb@[@\verb@8@\verb@]@\verb@+@\verb@e@\verb@[@\verb@5@\verb@1@\verb@6@\verb@]@\verb@-@\verb@v@\verb@*@\verb@4@\verb@)@\verb@e@\verb@=@\verb@d@\verb@+@\verb@i@\verb@+@\verb@5@\verb@1@\verb@2@\verb@+@\verb@i@\verb@/@\verb@5@\verb@0@\verb@4@\verb@*@\verb@8@\verb@+@\verb@j@\verb@%@\verb@4@\verb@-@\verb@c@\verb@-@\verb@-@\verb@;@\verb@f@\verb@o@\verb@r@\verb@(@\verb@;@\verb@n@\verb@=@\verb@c@\verb@%@\verb@4@\verb@,@\verb@6@\verb@5@\verb@5@\verb@4@\verb@4@\verb@>@ 
+
+\verb@c@\verb@;@\verb@c@\verb@+@\verb@+@\verb@)@\verb@p@\verb@u@\verb@t@\verb@c@\verb@h@\verb@a@\verb@r@\verb@(@\verb@c@\verb@>@\verb@7@\verb@?@\verb@n@\verb@>@\verb@2@\verb@|@\verb@|@\verb@(@\verb@u@\verb@=@\verb@d@\verb@[@\verb@c@\verb@-@\verb@n@\verb@-@\verb@7@\verb@]@\verb@*@\verb@4@\verb@*@\verb@(@\verb@n@\verb@<@\verb@2@\verb@?@\verb@!@\verb@n@\verb@?@\verb@R@\verb@G@\verb@B@\verb@)@\verb@)@\verb@>@\verb@2@\verb@5@\verb@5@\verb@?@\verb@2@\verb@5@\verb@5@\verb@:@ 
+
+\verb@#@\verb@d@\verb@e@\verb@f@\verb@i@\verb@n@\verb@e@\verb@/@\verb@*@\verb@x@\verb@*@\verb@/@\verb@T@\verb@u@\verb@r@\verb@i@\verb@n@\verb@g@\verb@(@\verb@x@\verb@)@\verb@4@\verb@]@\verb@=@\verb@g@\verb@e@\verb@t@\verb@c@\verb@h@\verb@a@\verb@r@\verb@(@\verb@)@\verb@&@\verb@1@\verb@2@\verb@7@\verb@)@\verb@)@\verb@u@\verb@=@\verb@v@\verb@;@\verb@i@\verb@f@\verb@(@\verb@b@\verb@[@\verb@6@\verb@]@\verb@>@\verb@1@\verb@)@\verb@s@\verb@(@\verb@)@\verb@;@\verb@}@\verb@}@ 
+
+\verb@u@\verb@<@\verb@0@\verb@?@\verb@0@\verb@:@\verb@u@\verb@:@\verb@c@\verb@<@\verb@0@\verb@?@\verb@1@\verb@2@\verb@4@\verb@-@\verb@c@\verb@*@\verb@3@\verb@:@\verb@c@\verb@=@\verb@=@\verb@5@\verb@)@\verb@;@\verb@/@\verb@*@\verb@ @\verb@-@\verb@-@\verb@ @\verb@T@\verb@h@\verb@e@\verb@ @\verb@w@\verb@o@\verb@r@\verb@d@\verb@ @\verb@"@\verb@g@\verb@e@\verb@n@\verb@i@\verb@u@\verb@s@\verb@"@\verb@ @\verb@i@\verb@s@\verb@ @\verb@*@\verb@/@\verb@ @\verb@f@\verb@o@\verb@r@ 
+
+ 
+
+ 
+
+\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@ @\verb@A@\verb@l@\verb@a@\verb@n@\verb@ @\verb@T@\verb@u@\verb@r@\verb@i@\verb@n@\verb@g@\verb@ @\verb@ @\verb@(@\verb@1@\verb@9@\verb@1@\verb@2@\verb@-@\verb@-@\verb@1@\verb@9@\verb@5@\verb@4@\verb@)@ 
+
+ 
+
+
+\end{frame}
+\end{document}

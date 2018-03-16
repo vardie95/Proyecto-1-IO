@@ -12,7 +12,7 @@ int **matrix = NULL;
 int main(int argc, char *argv[] ){
 	float x = 0 / 2;
 	srand(time(NULL));
-	
+	makeBeamer();
 	if (argc == 2) {
 		if( ( !(strcmp(argv[1], "x")))) { // If user passes the value x - Experimental mode starts
 			printf("Modo Experimental\n");
@@ -60,20 +60,24 @@ int main(int argc, char *argv[] ){
 	} else {
 		printf("Error: Please provide the correct argument\n" );
 	}
+	fprintf(out,"\\end{document}\n");
+	//system("pdflatex salida/salida.tex");
+	//system("evince salida.pdf");
 	return 0; 
 }
 
 void createOutFile()
 {
-	out = fopen ("salida.tex", "w");
+	out = fopen ("salida/salida.tex", "w");
 }
 
 void writeHeader(){
 	fprintf(out,"\\documentclass[12]{beamer}\n");
-    fprintf(out,"\\usetheme{Oxygen}\n");
+        fprintf(out,"\\usetheme{Oxygen}\n");
 	fprintf(out,"\\hypersetup{pdfpagemode=FullScreen}\n");
 	fprintf(out,"\\usepackage{thumbpdf}\n");
 	fprintf(out,"\\usepackage{wasysym}\n");
+	fprintf(out,"\\usepackage{adjustbox}\n");
 	fprintf(out,"\\usepackage{ucs}\n");
 	fprintf(out,"\\usepackage[utf8]{inputenc}\n");
 	fprintf(out,"\\usepackage{verbatim}\n\n");
@@ -82,24 +86,53 @@ void writeHeader(){
 	fprintf(out,"\\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}\n\n");
 	fprintf(out,"\\begin{document}\n");
 	fprintf(out,"\\frame{\\titlepage}\n");
-	fprintf(out,"\\section{Introducción}\n");
-	fprintf(out,"\\begin{frame}\n");
-	fprintf(out,"\\frametitle{Introducción}\n");
-
-	fprintf(out,"\\end{frame}\n");
+	fprintf(out,"\\section{Greedy}\n");
+	
 }
+
+
+void printable(int ** c,int n,int m){
+	
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{Dynamic}\n\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\begin{tabular}{ |");
+	for (int i=0; i < n;i++) {
+		fprintf(out,"c|");
+	}
+	fprintf(out,"}\n");
+ 	fprintf(out,"\\hline\n");
+	for (int i=0; i < m;i++) {
+		for(int j=0; j< n; j++){
+			if(j!=n-1){
+				fprintf(out, " %d &",c[i][j]);		
+			}else{
+				fprintf(out, " %d ",c[i][j]);
+			}
+		}
+	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+}
+
+
 
 void makeBeamer(){
 	createOutFile();
 	writeHeader();
-	//system("evince salida/salida.pdf");
-	fprintf(out,"\\end{document}\n");
+	
+	
 
 }
 
 void basicGreedy(int bag_size, int items_value[], int items_size[], int len){ // Basic greedy algorithm
 	printf("%s\n", "Basic Greedy:");
-	makeBeamer();
 	int bag_value = 0;
 	int temp_higher_value = 0;
 	int temp_size = 0;
@@ -187,15 +220,14 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
     		}
     	}
     }
-
+	
     for(i = 0; i < m; i++) {
 	    for(j = 0; j < n; j++) {
 	      printf("%6d",p[i][j]);
 	    }
 	    printf("\n");
     }
-
-
+    printable(p,n,m);
 
     /* Deallocate memory */
   	for(i = 0; i < m; i++) {
