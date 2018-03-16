@@ -37,7 +37,7 @@ int main(int argc, char *argv[] ){
 				items_size_3[i] = rand_size;
 				printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
 			}
-
+			slideValues(items_value,items_size,6);
 			printf("%s\n", "");
 
 			basicGreedy(15, items_value, items_size, 6); // The basic greedy algorithm is execute
@@ -97,6 +97,7 @@ void printable(int ** c,int n,int m){
 	fprintf(out,"\\frametitle{Dynamic}\n\n");
 	fprintf(out,"\\begin{center}\n");
 	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
 	fprintf(out,"\\begin{tabular}{ |");
 	for (int i=0; i < n;i++) {
 		fprintf(out,"c|");
@@ -112,6 +113,29 @@ void printable(int ** c,int n,int m){
 			}
 		}
 	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+}
+
+void slideValues(int items_value[],int items_size[],int len){
+	
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{Objects Information}\n\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\begin{tabular}{ |c|c| }\n");
+	fprintf(out,"\\hline\n");
+	fprintf(out,"    Value     &     Size     \\\\");
+	fprintf(out,"\\hline\n");
+	fprintf(out,"\\hline\n");
+	for (int i=0; i < len; i++) {
+		fprintf(out,"  %d  & %d \\\\ \n",items_value[i],items_size[i]);
 		fprintf(out,"\\hline\n");
 	}
 	fprintf(out, "\\end{tabular}\n");
