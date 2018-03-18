@@ -2,10 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h> //cambio
 FILE *out;
 int **matrix = NULL;
 
+#include <sys/time.h>
 
+/* retorna "a - b" en segundos */
+double timeval_diff(struct timeval *a, struct timeval *b)
+{
+  return
+    (double)(a->tv_sec + (double)a->tv_usec/1000000) -
+    (double)(b->tv_sec + (double)b->tv_usec/1000000);
+}
 
 
 
@@ -25,6 +34,10 @@ int main(int argc, char *argv[] ){
 
 			int items_value_3[6];   // Variables values for dinamic programming solution
 			int items_size_3[6];    // Variables size for dinamic programming solution
+			struct timeval t_ini, t_fin;
+			double secsGreedy;
+			double secsProGreedy;
+			double secsDynamic;
 
 			for (int i = 0; i < 6; i++) {
 				int rand_value = (rand() % 20) + 1; // Variable value randomizer
@@ -39,17 +52,29 @@ int main(int argc, char *argv[] ){
 			}
 			slideValues(items_value,items_size,6);
 			printf("%s\n", "");
-
+			gettimeofday(&t_ini, NULL);
 			basicGreedy(15, items_value, items_size, 6); // The basic greedy algorithm is execute
+			gettimeofday(&t_fin, NULL);
+			secsGreedy = timeval_diff(&t_fin, &t_ini);
+  			printf("\n\n %.16g milisegundos\n", secsGreedy * 1000.0);
+
 
 			printf("\n%s\n", "------------------------------------------");
 
+			gettimeofday(&t_ini, NULL);
 			proportionalGreedy(15, items_value_2, items_size_2, 6); // The proportional greedy algorithm is execute
-
+			gettimeofday(&t_fin, NULL);
+			secsProGreedy = timeval_diff(&t_fin, &t_ini);
+			printf("\n\n %.16g milisegundos\n", secsProGreedy * 1000.0);
+			
 			printf("\n%s\n", "------------------------------------------");
-
+			gettimeofday(&t_ini, NULL);
 			dinamicProgramming(16, 6, items_value_3, items_size_3); // The dinamic programming algorithm is execute (We pass a value of 16 because we need 0 to 15 rows)
-
+			gettimeofday(&t_fin, NULL);
+			secsDynamic = timeval_diff(&t_fin, &t_ini);			
+			printf("\n\n %.16g milisegundos\n", secsDynamic * 1000.0);
+			printTimesPractice(secsGreedy,secsProGreedy,secsDynamic);
+			
 
 		} else if ( ( !(strcmp(argv[1], "y")))){
 			printf("Modo  Cientifico\n");
@@ -84,8 +109,9 @@ int main(int argc, char *argv[] ){
 				basicGreedy(bag_size, items_value, items_size, number_items);
 				dinamicProgramming(bag_size + 1, number_items, items_value_3, items_size_3);
 				printf("\n%s\n", "<<<<<<---------------------------------->>>>>>");
-				experiments_left -= 100;
+				experiments_left -= 1;
 			//dinamicExample();
+				}
 		} else{
 			printf("Error:Give a correct argument\n");
 		}
@@ -176,6 +202,21 @@ void slideValues(int items_value[],int items_size[],int len){
 	fprintf(out,"\\end{frame}\n");
 
 }
+
+void printTimesPractice(double time_greedy,double time_proGreedy,double time_Dynamic){
+	
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{Times of Execution Algorithms}\n\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"Greedy Execution time was:  %f miliseconds \n",time_greedy);
+	fprintf(out,"\\newline\n");
+	fprintf(out,"Proporcional Greedy Execution time was:  %f    miliseconds\n",time_proGreedy);
+	fprintf(out,"Dynamic Execution time was:  %f  miliseconds \n",time_Dynamic);
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+}
+
 
 
 
