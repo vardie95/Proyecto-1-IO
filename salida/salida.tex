@@ -7,14 +7,13 @@
 \usepackage{ucs}
 \usepackage[utf8]{inputenc}
 \usepackage{verbatim}
-
 \title{Proyecto 01}
 \subtitle{Investigación de Operaciones}
 \author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}
 
 \begin{document}
 \frame{\titlepage}
-\section{Greedy}
+\section{Bag Problem}
 \begin{frame}
 \frametitle{Objects Information}
 
@@ -25,21 +24,77 @@
 \hline
     Value     &     Size     \\\hline
 \hline
-  18  & 7 \\ 
+  8  & 7 \\ 
 \hline
-  15  & 5 \\ 
+  17  & 5 \\ 
 \hline
-  7  & 4 \\ 
+  4  & 1 \\ 
 \hline
-  2  & 2 \\ 
+  10  & 5 \\ 
 \hline
-  19  & 2 \\ 
+  18  & 3 \\ 
 \hline
-  4  & 3 \\ 
+  20  & 1 \\ 
 \hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
+
+\end{frame}
+\begin{frame}
+\frametitle{Basic Greedy}
+
+\begin{flushleft}
+\small
+\small
+\large 
+The Size of the bag is:  15 
+\newline 
+\newline 
+\newline 
+\small 
+item: 5 was added to the bag: Size: 1  Space left in bag: 14 
+\newline
+item: 4 was added to the bag: Size: 3  Space left in bag: 11 
+\newline
+item: 1 was added to the bag: Size: 5  Space left in bag: 6 
+\newline
+item: 3 was added to the bag: Size: 5  Space left in bag: 1 
+\newline
+item: 2 was added to the bag: Size: 1  Space left in bag: 0 
+\newline
+\newline 
+\large 
+Total Bag value is:  69 
+\end{flushleft}
+
+\end{frame}
+\begin{frame}
+\frametitle{Proportional Greedy}
+
+\begin{flushleft}
+\small
+\small
+\large 
+The Size of the bag is:  15 
+\newline 
+\newline 
+\newline 
+\small 
+item: 5 was added to the bag: Size: 1  Space left in bag: 14 
+\newline
+item: 4 was added to the bag: Size: 3  Space left in bag: 11 
+\newline
+item: 2 was added to the bag: Size: 1  Space left in bag: 10 
+\newline
+item: 1 was added to the bag: Size: 5  Space left in bag: 5 
+\newline
+item: 3 was added to the bag: Size: 5  Space left in bag: 0 
+\newline
+\newline 
+\large 
+Total Bag value is:  69 
+\end{flushleft}
 
 \end{frame}
 \begin{frame}
@@ -50,37 +105,37 @@
 \small
 \begin{tabular}{ |c|c|c|c|c|c|}
 \hline
- 0 & 0 & 0 & 0 & 0 & 0 \\ 
+ \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{0}\\ 
 \hline
- 0 & 0 & 0 & 0 & 0 & 0 \\ 
+ \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{green}{4} & \textcolor{red}{4} & \textcolor{red}{4} & \textcolor{green}{20}\\ 
 \hline
- 0 & 0 & 0 & 2 & 19 & 19 \\ 
+ \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{green}{4} & \textcolor{red}{4} & \textcolor{red}{4} & \textcolor{green}{24}\\ 
 \hline
- 0 & 0 & 0 & 2 & 19 & 19 \\ 
+ \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{green}{4} & \textcolor{red}{4} & \textcolor{green}{18} & \textcolor{green}{24}\\ 
 \hline
- 0 & 0 & 7 & 7 & 21 & 21 \\ 
+ \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{green}{4} & \textcolor{red}{4} & \textcolor{green}{22} & \textcolor{green}{38}\\ 
 \hline
- 0 & 15 & 15 & 15 & 21 & 23 \\ 
+ \textcolor{red}{0} & \textcolor{green}{17} & \textcolor{red}{17} & \textcolor{red}{17} & \textcolor{green}{22} & \textcolor{green}{42}\\ 
 \hline
- 0 & 15 & 15 & 15 & 26 & 26 \\ 
+ \textcolor{red}{0} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{red}{21} & \textcolor{green}{22} & \textcolor{green}{42}\\ 
 \hline
- 18 & 18 & 18 & 18 & 34 & 34 \\ 
+ \textcolor{green}{8} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{red}{21} & \textcolor{green}{22} & \textcolor{green}{42}\\ 
 \hline
- 18 & 18 & 18 & 18 & 34 & 34 \\ 
+ \textcolor{green}{8} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{red}{21} & \textcolor{green}{35} & \textcolor{green}{42}\\ 
 \hline
- 18 & 18 & 22 & 22 & 37 & 37 \\ 
+ \textcolor{green}{8} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{red}{21} & \textcolor{green}{39} & \textcolor{green}{55}\\ 
 \hline
- 18 & 18 & 22 & 22 & 37 & 38 \\ 
+ \textcolor{green}{8} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{green}{27} & \textcolor{green}{39} & \textcolor{green}{59}\\ 
 \hline
- 18 & 18 & 25 & 25 & 41 & 41 \\ 
+ \textcolor{green}{8} & \textcolor{green}{17} & \textcolor{green}{21} & \textcolor{green}{31} & \textcolor{green}{39} & \textcolor{green}{59}\\ 
 \hline
- 18 & 33 & 33 & 33 & 41 & 41 \\ 
+ \textcolor{green}{8} & \textcolor{green}{25} & \textcolor{red}{25} & \textcolor{green}{31} & \textcolor{green}{39} & \textcolor{green}{59}\\ 
 \hline
- 18 & 33 & 33 & 33 & 44 & 44 \\ 
+ \textcolor{green}{8} & \textcolor{green}{25} & \textcolor{green}{29} & \textcolor{green}{31} & \textcolor{green}{45} & \textcolor{green}{59}\\ 
 \hline
- 18 & 33 & 33 & 35 & 52 & 52 \\ 
+ \textcolor{green}{8} & \textcolor{green}{25} & \textcolor{green}{29} & \textcolor{green}{31} & \textcolor{green}{49} & \textcolor{green}{65}\\ 
 \hline
- 18 & 33 & 33 & 35 & 52 & 52 \\ 
+ \textcolor{green}{8} & \textcolor{green}{25} & \textcolor{green}{29} & \textcolor{green}{31} & \textcolor{green}{49} & \textcolor{green}{69}\\ 
 \hline
 \end{tabular}
 \end{adjustbox}
@@ -91,10 +146,10 @@
 \frametitle{Times of Execution Algorithms}
 
 \begin{center}
-Greedy Execution time was:  0.000044 miliseconds 
+Greedy Execution time was:  0.000013 miliseconds 
 \newline
-Proporcional Greedy Execution time was:  0.000038    miliseconds
-Dynamic Execution time was:  0.000198  miliseconds 
+Proporcional Greedy Execution time was:  0.000012    miliseconds
+Dynamic Execution time was:  0.000135  miliseconds 
 \end{center}
 
 \end{frame}

@@ -139,7 +139,7 @@ void writeHeader(){
 	fprintf(out,"\\usepackage{adjustbox}\n");
 	fprintf(out,"\\usepackage{ucs}\n");
 	fprintf(out,"\\usepackage[utf8]{inputenc}\n");
-	fprintf(out,"\\usepackage{verbatim}\n\n");
+	fprintf(out,"\\usepackage{verbatim}\n");
 	fprintf(out,"\\title{Proyecto 01}\n");
 	fprintf(out,"\\subtitle{Investigación de Operaciones}\n");
 	fprintf(out,"\\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}\n\n");
@@ -150,7 +150,7 @@ void writeHeader(){
 }
 
 
-void printable(int ** c,int n,int m){
+void printable(int ** p,int ** c,int n,int m){
 	
 	fprintf(out,"\\begin{frame}\n");
 	fprintf(out,"\\frametitle{Dynamic}\n\n");
@@ -166,9 +166,18 @@ void printable(int ** c,int n,int m){
 	for (int i=0; i < m;i++) {
 		for(int j=0; j< n; j++){
 			if(j!=n-1){
-				fprintf(out, " %d &",c[i][j]);		
+				if(c[i][j]== 0){
+					fprintf(out, " \\textcolor{red}{%d} &",p[i][j]);
+				}else{
+					fprintf(out, " \\textcolor{green}{%d} &",p[i][j]);
+				}
+						
 			}else{
-				fprintf(out, " %d ",c[i][j]);
+				if(c[i][j]== 0){
+					fprintf(out, " \\textcolor{red}{%d}",p[i][j]);
+				}else{
+					fprintf(out, " \\textcolor{green}{%d}",p[i][j]);
+				}
 			}
 		}
 	 	fprintf(out,"\\\\ \n");
@@ -336,10 +345,15 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
 		printf("%d, %d\n", items_value[i], items_size[i]);
 	}*/
 	int **p;
+	int **c;
   	int i, j;
   	p = malloc(sizeof(float *) * m); /* Row pointers */
 	for(i = 0; i < m; i++) {
 		p[i] =  malloc(sizeof(float) * n); /* Rows */
+	}
+	c = malloc(sizeof(float *) * m); /* Row pointers */
+	for(i = 0; i < m; i++) {
+		c[i] =  malloc(sizeof(float) * n); /* Rows */
 	}
 
 	/* Assign values to array elements */
@@ -350,8 +364,10 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
     				p[i][j] = items_value[j];
     			} else if (j > 0 && items_value[j] + p[i - items_size[j]][j-1] >= p[i][j-1]){
     				p[i][j] = items_value[j] + p[i - items_size[j]][j-1];
+				c[i][j] =1 ;
     			} else {
     				p[i][j] = p[i][j-1];
+				c[i][j] =0;
     			} 
     		} else if (j > 0){
     			p[i][j] = p[i][j-1];
@@ -360,6 +376,12 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
     		}
     	}
     }
+    for (i = 0; i < m ;i++){
+	if(p[i][0] !=0){
+		c[i][0]=1;
+	}
+	
+}
 	
     for(i = 0; i < m; i++) {
 	    for(j = 0; j < n; j++) {
@@ -367,12 +389,18 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
 	    }
 	    printf("\n");
     }
-    printable(p,n,m);
+    
+    printable(p,c,n,m);
 
     /* Deallocate memory */
   	for(i = 0; i < m; i++) {
 	    free(p[i]); /* Rows */
 	}
 	free(p); /* Row pointers */
+	/* Deallocate memory */
+  	for(i = 0; i < m; i++) {
+	    free(c[i]); /* Rows */
+	}
+	free(c); /* Row pointers */
 
 }
