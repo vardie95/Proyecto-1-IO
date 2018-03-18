@@ -1,0 +1,101 @@
+\documentclass[12]{beamer}
+\usetheme{Oxygen}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{thumbpdf}
+\usepackage{wasysym}
+\usepackage{adjustbox}
+\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+
+\title{Proyecto 01}
+\subtitle{Investigación de Operaciones}
+\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}
+
+\begin{document}
+\frame{\titlepage}
+\section{Greedy}
+\begin{frame}
+\frametitle{Objects Information}
+
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\small
+\begin{tabular}{ |c|c| }
+\hline
+    Value     &     Size     \\\hline
+\hline
+  5  & 6 \\ 
+\hline
+  1  & 6 \\ 
+\hline
+  2  & 3 \\ 
+\hline
+  14  & 2 \\ 
+\hline
+  6  & 1 \\ 
+\hline
+  1  & 3 \\ 
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+
+\end{frame}
+\begin{frame}
+\frametitle{Dynamic}
+
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\small
+\begin{tabular}{ |c|c|c|c|c|c|}
+\hline
+ 0 & 0 & 0 & 0 & 0 & 0 \\ 
+\hline
+ 0 & 0 & 0 & 0 & 6 & 6 \\ 
+\hline
+ 0 & 0 & 0 & 14 & 14 & 14 \\ 
+\hline
+ 0 & 0 & 2 & 14 & 20 & 20 \\ 
+\hline
+ 0 & 0 & 2 & 14 & 20 & 20 \\ 
+\hline
+ 0 & 0 & 2 & 16 & 20 & 20 \\ 
+\hline
+ 5 & 5 & 5 & 16 & 22 & 22 \\ 
+\hline
+ 5 & 5 & 5 & 16 & 22 & 22 \\ 
+\hline
+ 5 & 5 & 5 & 19 & 22 & 22 \\ 
+\hline
+ 5 & 5 & 7 & 19 & 25 & 25 \\ 
+\hline
+ 5 & 5 & 7 & 19 & 25 & 25 \\ 
+\hline
+ 5 & 5 & 7 & 21 & 25 & 25 \\ 
+\hline
+ 5 & 6 & 7 & 21 & 27 & 27 \\ 
+\hline
+ 5 & 6 & 7 & 21 & 27 & 27 \\ 
+\hline
+ 5 & 6 & 7 & 21 & 27 & 27 \\ 
+\hline
+ 5 & 6 & 8 & 21 & 27 & 28 \\ 
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+
+\end{frame}
+\begin{frame}
+\frametitle{Times of Execution Algorithms}
+
+\begin{center}
+Greedy Execution time was:  0.000018 miliseconds 
+\newline
+Proporcional Greedy Execution time was:  0.000010    miliseconds
+Dynamic Execution time was:  0.000067  miliseconds 
+\end{center}
+
+\end{frame}
+\end{document}

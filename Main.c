@@ -119,7 +119,8 @@ int main(int argc, char *argv[] ){
 		printf("Error: Please provide the correct argument\n" );
 	}
 	fprintf(out,"\\end{document}\n");
-	//system("pdflatex salida/salida.tex");
+	fclose(out);
+	system("pdflatex salida/salida.tex");
 	//system("evince salida.pdf");
 	return 0; 
 }
