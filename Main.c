@@ -53,6 +53,38 @@ int main(int argc, char *argv[] ){
 
 		} else if ( ( !(strcmp(argv[1], "y")))){
 			printf("Modo  Cientifico\n");
+			int experiments_left = 100;
+			while (experiments_left > 0) {
+				int bag_size = (rand() % 901) + 100; // Defines this round bag size
+				double max = bag_size * 0.4; // Get 40% of the total bag size
+				int max_item_size = (int) max; // Converts the 40% into an integer
+				int number_items = (rand() % 91) + 10; // Defines the number of items in this round
+				
+				int items_value[number_items];     // Variables values for basic greedy 
+				int items_size[number_items];      // Variables sizes for basic greedy
+
+				int items_value_2[number_items];   // Variables values for proportional greedy
+				int items_size_2[number_items];    // Variables size for proportional greedy
+
+				int items_value_3[number_items];   // Variables values for dinamic programming solution
+				int items_size_3[number_items];    // Variables size for dinamic programming solution
+
+				printf("%s%d, bag = %d, items # = %d\n", "Items for round ", experiments_left, bag_size, number_items);
+				for (int i = 0; i < number_items; i++) {
+					int value = (rand() % 100) + 1;
+					int size = (rand() % max_item_size) + 1;
+					items_value[i] = value;
+					items_size[i] = size;
+					items_value_2[i] = value;
+					items_size_2[i] = size;
+					items_value_3[i] = value;
+					items_size_3[i] = size;
+					printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
+				}
+				basicGreedy(bag_size, items_value, items_size, number_items);
+				dinamicProgramming(bag_size + 1, number_items, items_value_3, items_size_3);
+				printf("\n%s\n", "<<<<<<---------------------------------->>>>>>");
+				experiments_left -= 100;
 			//dinamicExample();
 		} else{
 			printf("Error:Give a correct argument\n");
