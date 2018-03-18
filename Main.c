@@ -145,7 +145,7 @@ void writeHeader(){
 	fprintf(out,"\\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}\n\n");
 	fprintf(out,"\\begin{document}\n");
 	fprintf(out,"\\frame{\\titlepage}\n");
-	fprintf(out,"\\section{Greedy}\n");
+	fprintf(out,"\\section{Bag Problem}\n");
 	
 }
 
@@ -217,7 +217,27 @@ void printTimesPractice(double time_greedy,double time_proGreedy,double time_Dyn
 	fprintf(out,"\\end{frame}\n");
 
 }
+void createSlide(char array[]){
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{%s}\n\n",array);
+	fprintf(out,"\\begin{flushleft}\n");	
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\small\n");
 
+}
+void printGreedy(int item,int item_value, int bag_size){
+	fprintf(out,"item: %d was added to the bag: Size: %d  Space left in bag: %d \n",item,item_value,bag_size);
+	fprintf(out,"\\newline\n");
+
+
+}
+
+void endSlide(){
+	
+	fprintf(out, "\\end{flushleft}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+}
 
 
 
@@ -236,6 +256,13 @@ void basicGreedy(int bag_size, int items_value[], int items_size[], int len){ //
 	int temp_size = 0;
 	int temp_index;	
 	bool space_available = true;
+	createSlide("Basic Greedy");
+	fprintf(out,"\\large \n");
+	fprintf(out,"The Size of the bag is:  %d \n",bag_size);
+	fprintf(out,"\\newline \n");
+	fprintf(out,"\\newline \n");
+        fprintf(out,"\\newline \n");
+	fprintf(out, "\\small \n");
 	while (space_available) {
 		space_available = false;
 		for (int i = 0; i < len; i++) {
@@ -247,13 +274,17 @@ void basicGreedy(int bag_size, int items_value[], int items_size[], int len){ //
 			}
 		}
 		if (space_available == true) {
-			printf("%s%d%s%d%s%d\n", "Item ", temp_index, ": was added to the bag.BAG: ", bag_size, " -> ", bag_size - temp_size);
+			printGreedy(temp_index,temp_size,bag_size-temp_size);
 			bag_value += temp_higher_value;
 			bag_size -= temp_size;
 			items_value[temp_index] = 0;
 			temp_higher_value = 0;
 		}	
 	}
+	fprintf(out,"\\newline \n");
+	fprintf(out,"\\large \n");
+	fprintf(out,"Total Bag value is:  %d \n",bag_value);
+	endSlide();
 }
 
 void proportionalGreedy(int bag_size, int items_value[], int items_size[], int len) {
@@ -263,6 +294,13 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[], int l
 	int temp_size = 0;
 	int temp_index;	
 	bool space_available = true;
+	createSlide("Proportional Greedy");
+	fprintf(out,"\\large \n");
+	fprintf(out,"The Size of the bag is:  %d \n",bag_size);
+	fprintf(out,"\\newline \n");
+	fprintf(out,"\\newline \n");
+        fprintf(out,"\\newline \n");
+	fprintf(out, "\\small \n");
 	while (space_available) {
 		space_available = false;
 		for (int i = 0; i < len; i++) {
@@ -276,13 +314,17 @@ void proportionalGreedy(int bag_size, int items_value[], int items_size[], int l
 			}
 		}
 		if (space_available == true) {
-			printf("%s%d%s%d%s%d\n", "Item ", temp_index, ": was added to the bag.BAG: ", bag_size, " -> ", bag_size - temp_size);
+			printGreedy(temp_index,temp_size,bag_size-temp_size);
 			bag_value += items_value[temp_index];
 			bag_size -= temp_size;
 			items_value[temp_index] = 0;
 			temp_higher_proportion = 0;
 		}	
 	}
+	fprintf(out,"\\newline \n");
+	fprintf(out,"\\large \n");
+	fprintf(out,"Total Bag value is:  %d \n",bag_value);
+	endSlide();
 }
 
 void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
