@@ -78,40 +78,8 @@ int main(int argc, char *argv[] ){
 
 		} else if ( ( !(strcmp(argv[1], "y")))){
 			printf("Modo  Cientifico\n");
-			int experiments_left = 100;
-			while (experiments_left > 0) {
-				int bag_size = (rand() % 901) + 100; // Defines this round bag size
-				double max = bag_size * 0.4; // Get 40% of the total bag size
-				int max_item_size = (int) max; // Converts the 40% into an integer
-				int number_items = (rand() % 91) + 10; // Defines the number of items in this round
-				
-				int items_value[number_items];     // Variables values for basic greedy 
-				int items_size[number_items];      // Variables sizes for basic greedy
-
-				int items_value_2[number_items];   // Variables values for proportional greedy
-				int items_size_2[number_items];    // Variables size for proportional greedy
-
-				int items_value_3[number_items];   // Variables values for dinamic programming solution
-				int items_size_3[number_items];    // Variables size for dinamic programming solution
-
-				printf("%s%d, bag = %d, items # = %d\n", "Items for round ", experiments_left, bag_size, number_items);
-				for (int i = 0; i < number_items; i++) {
-					int value = (rand() % 100) + 1;
-					int size = (rand() % max_item_size) + 1;
-					items_value[i] = value;
-					items_size[i] = size;
-					items_value_2[i] = value;
-					items_size_2[i] = size;
-					items_value_3[i] = value;
-					items_size_3[i] = size;
-					printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
-				}
-				basicGreedy(bag_size, items_value, items_size, number_items);
-				dinamicProgramming(bag_size + 1, number_items, items_value_3, items_size_3);
-				printf("\n%s\n", "<<<<<<---------------------------------->>>>>>");
-				experiments_left -= 1;
-			//dinamicExample();
-				}
+			experimental(1);
+			
 		} else{
 			printf("Error:Give a correct argument\n");
 		}
@@ -121,7 +89,7 @@ int main(int argc, char *argv[] ){
 	fprintf(out,"\\end{document}\n");
 	fclose(out);
 	system("pdflatex salida/salida.tex");
-	//system("evince salida.pdf");
+	system("evince salida.pdf");
 	return 0; 
 }
 
@@ -377,11 +345,10 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
     	}
     }
     for (i = 0; i < m ;i++){
-	if(p[i][0] !=0){
-		c[i][0]=1;
+		if(p[i][0] !=0){
+			c[i][0]=1;
+		}
 	}
-	
-}
 	
     for(i = 0; i < m; i++) {
 	    for(j = 0; j < n; j++) {
@@ -402,5 +369,331 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
 	    free(c[i]); /* Rows */
 	}
 	free(c); /* Row pointers */
+}
 
+void experimental(int n){
+	while (n > 0) {
+		int bag_size = 100;
+		int number_items = 10;
+
+		double **greedy_time;
+		int **greedy_value;
+
+		double **proportional_time;
+		int **proportional_value;
+
+		double **dinamic_time;
+		int **dinamic_value;
+
+		greedy_time = (double**) malloc(sizeof(double *) * 10);
+		greedy_value = malloc(sizeof(float *) * 10); /* Row pointers */
+
+		proportional_time = (double**) malloc(sizeof(double *) * 10);
+		proportional_value = malloc(sizeof(float *) * 10); /* Row pointers */
+
+		dinamic_time = (double**) malloc(sizeof(double *) * 10);
+		dinamic_value = malloc(sizeof(float *) * 10); /* Row pointers */		
+
+		for(int i = 0; i < 10; i++) {
+			greedy_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+			greedy_value[i] = malloc(sizeof(float) * 10);
+
+			proportional_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+			proportional_value[i] = malloc(sizeof(float) * 10);
+
+			dinamic_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+			dinamic_value[i] = malloc(sizeof(float) * 10);
+		}
+		struct timeval t_ini, t_fin;
+		double secsGreedy;
+		double secsProGreedy;
+		double secsDynamic;
+		for (int i = 0; i < 10; i++){
+			for (int j = 0; j < 10; j++){
+
+				int values[number_items];
+				int sizes[number_items];
+
+				int values_2[number_items];
+				int sizes_2[number_items];
+
+				int values_3[number_items];
+				int sizes_3[number_items];
+
+				for (int k = 0; k < number_items; k++){
+					int rand_value = (rand() % 100) + 1;
+					double max = bag_size * 0.4;
+					int max_item_size = (int) max;
+					int rand_size = (rand() % max_item_size) + 1;
+
+					values[k] = rand_value;
+					sizes[k] = rand_size;
+
+					values_2[k] = rand_value;
+					sizes_2[k] = rand_size;
+
+					values_3[k] = rand_value;
+					sizes_3[k] = rand_size;
+				}
+
+				gettimeofday(&t_ini, NULL);
+				int p = greedy_exp(bag_size, values, sizes, number_items); // The basic greedy algorithm is execute
+				greedy_value[i][j] = p;
+				gettimeofday(&t_fin, NULL);
+				secsGreedy = timeval_diff(&t_fin, &t_ini);
+	  			greedy_time[i][j] = secsGreedy * 1000.0;
+
+	  			gettimeofday(&t_ini, NULL);
+				int q = proportional_exp(bag_size, values_2, sizes_2, number_items); // The proportional greedy algorithm is execute
+				proportional_value[i][j] = q;
+				gettimeofday(&t_fin, NULL);
+				secsProGreedy = timeval_diff(&t_fin, &t_ini);
+	  			proportional_time[i][j] = secsProGreedy * 1000.0;
+
+	  			gettimeofday(&t_ini, NULL);
+				int z = dinamic_exp(bag_size, number_items, values_3, sizes_3); // The proportional greedy algorithm is execute
+				dinamic_value[i][j] = z;
+				gettimeofday(&t_fin, NULL);
+				secsDynamic = timeval_diff(&t_fin, &t_ini);
+	  			dinamic_time[i][j] = secsDynamic * 1000.0;
+
+	  			number_items += 10;
+			}
+			number_items = 10;
+			bag_size += 100;
+		}
+		printTable(1, greedy_time, greedy_value);
+		printTable(2, proportional_time, proportional_value);
+		printTable(3, dinamic_time, dinamic_value);
+		for(int i = 0; i < 10; i++) {
+	    	free(greedy_time[i]); /* Rows */
+	    	free(greedy_value[i]);
+
+	    	free(proportional_time[i]); /* Rows */
+	    	free(proportional_value[i]);
+
+	    	free(dinamic_time[i]); /* Rows */
+	    	free(dinamic_value[i]);
+		}
+		free(greedy_time); /* Row pointers */
+		free(greedy_value);
+
+		free(proportional_time); /* Row pointers */
+		free(proportional_value);
+
+		free(dinamic_time); /* Row pointers */
+		free(dinamic_value);
+		n -= 1;
+	}
+}
+
+int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
+	// for (int i = 0; i < len; i++) {
+	// 	printf("Item %d, Size: %d, Value: %d\n", i, items_size[i], items_value[i]);
+	// }
+	printf("---------------------New round----------------------\n");
+	int bag_value = 0;
+	int temp_higher_value = 0;
+	int temp_size = 0;
+	int temp_index;	
+	bool space_available = true;
+	printf("Bag size: %d, Number items = %d\n", bag_size, len);
+	while (space_available) {
+		space_available = false;
+		for (int i = 0; i < len; i++) {
+			// printf("----------------------------\n");
+			// for (int i = 0; i < len; i++) {
+			// 	printf("Item %d, Size: %d, Value: %d\n", i, items_size[i], items_value[i]);
+			// }
+			if (items_value[i] > temp_higher_value && items_size[i] <= bag_size) {
+				temp_higher_value = items_value[i];
+				temp_size = items_size[i];
+				temp_index = i;
+				space_available = true;
+			}
+		}
+		if (space_available == true) {
+			printf("%s%d%s%d%s%d Added to bag\n", "Item ", temp_index, " - Value: ", items_value[temp_index], " / Size: ", items_size[temp_index]);
+			bag_value += temp_higher_value;
+			bag_size -= temp_size;
+			items_value[temp_index] = 0;
+			temp_higher_value = 0;
+		}	
+	}
+	printf("Bag value = %d\n", bag_value);
+	return bag_value;
+}
+
+int proportional_exp(int bag_size, int items_value[], int items_size[], int len){
+	printf("---------------------New round----------------------\n");
+	int bag_value = 0;
+	float temp_higher_proportion = 0;
+	int temp_size = 0;
+	int temp_index;	
+	bool space_available = true;
+	printf("Bag size: %d, Number items = %d\n", bag_size, len);
+	while (space_available) {
+		space_available = false;
+		for (int i = 0; i < len; i++) {
+			if (items_value[i] > 0){
+				if ((items_value[i] / items_size[i]) > temp_higher_proportion && items_size[i] <= bag_size) {
+					temp_higher_proportion = items_value[i] / items_size[i];
+					temp_size = items_size[i];
+					temp_index = i;
+					space_available = true;
+				}
+			}
+		}
+		if (space_available == true) {
+			bag_value += items_value[temp_index];
+			bag_size -= temp_size;
+			items_value[temp_index] = 0;
+			temp_higher_proportion = 0;
+		}	
+	}
+	printf("Bag value = %d\n", bag_value);
+	return bag_value;
+}
+
+int dinamic_exp(int m, int n, int items_value[], int items_size[]){
+	srand(time(NULL));
+	int **p;
+  	int i, j;
+  	p = malloc(sizeof(float *) * m); /* Row pointers */
+	for(i = 0; i < m; i++) {
+		p[i] =  malloc(sizeof(float) * n); /* Rows */
+	}
+	/* Assign values to array elements */
+    for (j = 0; j < n; j++) {
+    	for (i = 0; i < m; i++) {
+    		if (items_size[j] <= i) {
+    			if (j == 0) {
+    				p[i][j] = items_value[j];
+    			} else if (j > 0 && items_value[j] + p[i - items_size[j]][j-1] >= p[i][j-1]){
+    				p[i][j] = items_value[j] + p[i - items_size[j]][j-1];
+    			} else {
+    				p[i][j] = p[i][j-1];
+    			} 
+    		} else if (j > 0){
+    			p[i][j] = p[i][j-1];
+    		} else {
+    			p[i][j] = 0;
+    		}
+    	}
+    }
+    int bag_value = p[m-1][n-1];
+    /* Deallocate memory */
+  	for(i = 0; i < m; i++) {
+	    free(p[i]); /* Rows */
+	}
+	free(p); /* Row pointers */
+	return bag_value;
+}
+
+void printTable(int l, double ** c, int ** d){
+	int m = 11;
+	int n = 11;
+	fprintf(out,"\\begin{frame}\n");
+	if (l == 1) {
+		fprintf(out,"\\frametitle{Greedy}\n\n");
+	} else if (l == 2) {
+		fprintf(out,"\\frametitle{Proportional}\n\n");
+	} else {
+		fprintf(out,"\\frametitle{Dinamic}\n\n");
+	}
+	fprintf(out, "Bagpack final values:\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\begin{tabular}{ |");
+	for (int i=0; i < n;i++) {
+		fprintf(out,"c|");
+	}
+	fprintf(out,"}\n");
+ 	fprintf(out,"\\hline\n");
+	for (int i=0; i < m;i++) {
+		for(int j=0; j< n; j++){
+			if (i == 0) {
+				if (j == 0) {
+					fprintf(out, " %s &", "Bagpack");
+				} else {
+					if(j!=n-1){
+						fprintf(out, " %d &", j*10);		
+					} else{
+						fprintf(out, " %d ",j*10);
+					}
+				}
+			} else if (j == 0){
+				if(j!=n-1){
+					fprintf(out, " %d &", i*100);		
+				}else{
+					fprintf(out, " %d ",i*100);
+				}
+			} else {
+				if(j!=n-1){
+				fprintf(out, " %d &", d[i-1][j-1]);		
+				}else{
+					fprintf(out, " %d ",d[i-1][j-1]);
+				}
+			}
+		}
+	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+	fprintf(out,"\\begin{frame}\n");
+	if (l == 1) {
+		fprintf(out,"\\frametitle{Greedy}\n\n");
+	} else if (l == 2) {
+		fprintf(out,"\\frametitle{Proportional}\n\n");
+	} else {
+		fprintf(out,"\\frametitle{Dinamic}\n\n");
+	}
+	fprintf(out, "Bagpack final execution times:\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\begin{tabular}{ |");
+	for (int i=0; i < n;i++) {
+		fprintf(out,"c|");
+	}
+	fprintf(out,"}\n");
+ 	fprintf(out,"\\hline\n");
+	for (int i=0; i < m;i++) {
+		for(int j=0; j< n; j++){
+			if (i == 0) {
+				if (j == 0) {
+					fprintf(out, " %s &", "");
+				} else {
+					if(j!=n-1){
+						fprintf(out, " %d &", j*10);		
+					} else{
+						fprintf(out, " %d ",j*10);
+					}
+				}
+			} else if (j == 0){
+				if(j!=n-1){
+					fprintf(out, " %d &", i*100);		
+				}else{
+					fprintf(out, " %d ",i*100);
+				}
+			} else {
+				if(j!=n-1){
+				fprintf(out, " %.16g &", c[i-1][j-1]);		
+				}else{
+					fprintf(out, " %.16g ",c[i-1][j-1]);
+				}
+			}
+		}
+	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
 }
