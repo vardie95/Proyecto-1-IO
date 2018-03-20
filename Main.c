@@ -51,6 +51,7 @@ int main(int argc, char *argv[] ){
 				printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
 			}
 			slideValues(items_value,items_size,6);
+			slideMatematico(items_value,items_size,6);
 			printf("%s\n", "");
 			gettimeofday(&t_ini, NULL);
 			basicGreedy(15, items_value, items_size, 6); // The basic greedy algorithm is execute
@@ -187,6 +188,37 @@ void slideValues(int items_value[],int items_size[],int len){
 	}
 	fprintf(out, "\\end{tabular}\n");
 	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+
+}
+void slideMatematico(int items_value[],int items_size[],int len){
+	
+	fprintf(out,"\\begin{frame}\n");
+	fprintf(out,"\\frametitle{Mathematic Form}\n\n");
+	fprintf(out,"Maximizar: \n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\[ ");
+	for (int i=0; i < len; i++) {
+		if(i!=len-1){
+			fprintf(out,"  %d x_{%d} + ",items_value[i],i);
+		}else{
+			fprintf(out,"  %d x_{%d} ",items_value[i],i);
+		}
+	}
+	fprintf(out,"\\] \n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"Sujeto a: \n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\[ ");
+	for (int i=0; i < len; i++) {
+		if(i!=len-1){
+			fprintf(out,"  %d x_{%d} + ",items_size[i],i);
+		}else{
+			fprintf(out,"  %d x_{%d} ",items_size[i],i);
+		}
+	}
+	fprintf(out,"<=15 \\] \n");
 	fprintf(out, "\\end{center}\n\n");
 	fprintf(out,"\\end{frame}\n");
 
