@@ -16,95 +16,6 @@ double timeval_diff(struct timeval *a, struct timeval *b)
     (double)(b->tv_sec + (double)b->tv_usec/1000000);
 }
 
-
-
-int main(int argc, char *argv[] ){
-	float x = 0 / 2;
-	srand(time(NULL));
-	makeBeamer();
-	if (argc == 2 || argc == 3) {
-		if( ( !(strcmp(argv[1], "x")))) { // If user passes the value x - Experimental mode starts
-			printf("Modo Experimental\n");
-
-			int items_value[6];     // Variables values for basic greedy 
-			int items_size[6];      // Variables sizes for basic greedy
-
-			int items_value_2[6];   // Variables values for proportional greedy
-			int items_size_2[6];    // Variables size for proportional greedy
-
-			int items_value_3[6];   // Variables values for dinamic programming solution
-			int items_size_3[6];    // Variables size for dinamic programming solution
-			struct timeval t_ini, t_fin;
-			double secsGreedy;
-			double secsProGreedy;
-			double secsDynamic;
-
-			for (int i = 0; i < 6; i++) {
-				int rand_value = (rand() % 20) + 1; // Variable value randomizer
-				int rand_size = (rand() % 7) + 1;   // Variable size randomizer
-				items_value[i] = rand_value;
-				items_size[i] = rand_size;
-				items_value_2[i] = rand_value;
-				items_size_2[i] = rand_size;
-				items_value_3[i] = rand_value;
-				items_size_3[i] = rand_size;
-				printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
-			}
-			slideValues(items_value,items_size,6);
-			slideMatematico(items_value,items_size,6);
-			printf("%s\n", "");
-			gettimeofday(&t_ini, NULL);
-			basicGreedy(15, items_value, items_size, 6); // The basic greedy algorithm is execute
-			gettimeofday(&t_fin, NULL);
-			secsGreedy = timeval_diff(&t_fin, &t_ini);
-  			printf("\n\n %.16g milisegundos\n", secsGreedy * 1000.0);
-
-
-			printf("\n%s\n", "------------------------------------------");
-
-			gettimeofday(&t_ini, NULL);
-			proportionalGreedy(15, items_value_2, items_size_2, 6); // The proportional greedy algorithm is execute
-			gettimeofday(&t_fin, NULL);
-			secsProGreedy = timeval_diff(&t_fin, &t_ini);
-			printf("\n\n %.16g milisegundos\n", secsProGreedy * 1000.0);
-			
-			printf("\n%s\n", "------------------------------------------");
-			gettimeofday(&t_ini, NULL);
-			dinamicProgramming(16, 6, items_value_3, items_size_3); // The dinamic programming algorithm is execute (We pass a value of 16 because we need 0 to 15 rows)
-			gettimeofday(&t_fin, NULL);
-			secsDynamic = timeval_diff(&t_fin, &t_ini);			
-			printf("\n\n %.16g milisegundos\n", secsDynamic * 1000.0);
-			printTimesPractice(secsGreedy,secsProGreedy,secsDynamic);
-			fprintf(out,"\\end{document}\n");
-			fclose(out);
-			system("pdflatex salida/salida.tex");
-			system("evince salida.pdf");
-				
-		} else if ( ( !(strcmp(argv[1], "-E=")))){
-			int n = atoi(argv[2]);
-			if(n!=0){
-				printf("Modo  Cientifico\n");
-				experimental(n);
-				fprintf(out,"\\end{document}\n");
-				fclose(out);
-				system("pdflatex salida/salida.tex");
-				system("evince salida.pdf");
-
-			}else{
-				printf("Error:Give a correct N argument\n");
-				}
-			
-			
-		} else{
-			printf("Error:Give a correct argument\n");
-		}
-	} else {
-		printf("Error: Please provide the correct argument\n" );
-	}
-	
-	return 0; 
-}
-
 void createOutFile()
 {
 	out = fopen ("salida/salida.tex", "w");
@@ -119,10 +30,9 @@ void writeHeader(){
 	fprintf(out,"\\usepackage{adjustbox}\n");
 	fprintf(out,"\\usepackage{ucs}\n");
 	fprintf(out,"\\usepackage[utf8]{inputenc}\n");
-	fprintf(out,"\\usepackage{verbatim}\n");
 	fprintf(out,"\\title{Proyecto 01}\n");
 	fprintf(out,"\\subtitle{Investigación de Operaciones}\n");
-	fprintf(out,"\\author{Luis Diego Vargas Arroyo- Carlos Villalobos Mora}\n\n");
+	fprintf(out,"\\author{Luis Diego Vargas Arroyo - Carlos Villalobos Mora}\n\n");
 	fprintf(out,"\\begin{document}\n");
 	fprintf(out,"\\frame{\\titlepage}\n");
 	fprintf(out,"\\section{Bag Problem}\n");
@@ -137,13 +47,16 @@ void printable(int ** p,int ** c,int n,int m){
 	fprintf(out,"\\begin{center}\n");
 	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
 	fprintf(out,"\\small\n");
-	fprintf(out,"\\begin{tabular}{ |");
+	fprintf(out,"\\begin{tabular}{ |c|");
 	for (int i=0; i < n;i++) {
 		fprintf(out,"c|");
 	}
 	fprintf(out,"}\n");
+	fprintf(out,"\\hline\n");
+	fprintf(out, "  & 0 & 1 & 2 & 3 & 4 & 5 \\\\ \n");
  	fprintf(out,"\\hline\n");
-	for (int i=0; i < m;i++) {
+	for (int i=1; i < m;i++) {
+		fprintf(out,"%d &",i);
 		for(int j=0; j< n; j++){
 			if(j!=n-1){
 				if(c[i][j]== 0){
@@ -177,13 +90,13 @@ void slideValues(int items_value[],int items_size[],int len){
 	fprintf(out,"\\begin{center}\n");
 	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
 	fprintf(out,"\\small\n");
-	fprintf(out,"\\begin{tabular}{ |c|c| }\n");
+	fprintf(out,"\\begin{tabular}{|c|c|c| }\n");
 	fprintf(out,"\\hline\n");
-	fprintf(out,"    Value     &     Size     \\\\");
+	fprintf(out," Object   & Value     &     Size     \\\\");
 	fprintf(out,"\\hline\n");
 	fprintf(out,"\\hline\n");
 	for (int i=0; i < len; i++) {
-		fprintf(out,"  %d  & %d \\\\ \n",items_value[i],items_size[i]);
+		fprintf(out,"%d & %d  & %d \\\\ \n",i,items_value[i],items_size[i]);
 		fprintf(out,"\\hline\n");
 	}
 	fprintf(out, "\\end{tabular}\n");
@@ -219,6 +132,7 @@ void slideMatematico(int items_value[],int items_size[],int len){
 		}
 	}
 	fprintf(out,"<=15 \\] \n");
+	fprintf(out,"\\[ x_{i} >= 0 \\]");
 	fprintf(out, "\\end{center}\n\n");
 	fprintf(out,"\\end{frame}\n");
 
@@ -228,12 +142,12 @@ void printTimesPractice(double time_greedy,double time_proGreedy,double time_Dyn
 	
 	fprintf(out,"\\begin{frame}\n");
 	fprintf(out,"\\frametitle{Times of Execution Algorithms}\n\n");
-	fprintf(out,"\\begin{center}\n");
-	fprintf(out,"Greedy Execution time was:  %f miliseconds \n",time_greedy);
+	fprintf(out,"Greedy Execution time was:  %.4g miliseconds \n",time_greedy*1000.0);
 	fprintf(out,"\\newline\n");
-	fprintf(out,"Proporcional Greedy Execution time was:  %f    miliseconds\n",time_proGreedy);
-	fprintf(out,"Dynamic Execution time was:  %f  miliseconds \n",time_Dynamic);
-	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"Proporcional Greedy Execution time was:  %.4g    miliseconds\n",time_proGreedy*1000.0);
+	fprintf(out,"\\newline\n");
+	fprintf(out,"Dynamic Execution time was:  %.4g  miliseconds \n",time_Dynamic*1000.0);
+	fprintf(out,"\\newline\n");
 	fprintf(out,"\\end{frame}\n");
 
 }
@@ -836,18 +750,18 @@ void printFinalTable(int runs, int ** c, int l){
  				if(j!=n-1){
                     double k = (double) c[i-1][j-1] / (double) runs;
                     //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
-                    if (k == 0) {
-                    	fprintf(out, "\\textcolor{red}{%f} &", k);
+                    if (k*100 <= 50 ) {
+                    	fprintf(out, "\\textcolor{red}{%.3f} &", k*100);
                     } else {
-                    	fprintf(out, "\\textcolor{green}{%f} &", k);
+                    	fprintf(out, "\\textcolor{green}{%.3f} &", k*100);
                     }
  				} else{
                     double k = (double) c[i-1][j-1] / (double) runs;
                     //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
-                    if (k == 0) {
-                    	fprintf(out, "\\textcolor{red}{%f} ", k);
+                    if (k*100 <= 50) {
+                    	fprintf(out, "\\textcolor{red}{%.3f} ", k*100);
                     } else {
-                    	fprintf(out, "\\textcolor{green}{%f} ", k);
+                    	fprintf(out, "\\textcolor{green}{%.3f} ", k*100);
                     }
 				}
 			}
@@ -922,3 +836,85 @@ void printFinalTable2(int runs, double ** c, int l){
 	fprintf(out, "\\end{center}\n\n");
 	fprintf(out,"\\end{frame}\n");
 }
+
+int main(int argc, char *argv[] ){
+	float x = 0 / 2;
+	srand(time(NULL));
+	makeBeamer();
+	if (argc == 2 || argc == 3) {
+		if( ( !(strcmp(argv[1], "x")))) { // If user passes the value x - Experimental mode starts
+			printf("Modo Experimental\n");
+
+			int items_value[6];     // Variables values for basic greedy 
+			int items_size[6];      // Variables sizes for basic greedy
+
+			int items_value_2[6];   // Variables values for proportional greedy
+			int items_size_2[6];    // Variables size for proportional greedy
+
+			int items_value_3[6];   // Variables values for dinamic programming solution
+			int items_size_3[6];    // Variables size for dinamic programming solution
+			struct timeval t_ini, t_fin;
+			double secsGreedy;
+			double secsProGreedy;
+			double secsDynamic;
+
+			for (int i = 0; i < 6; i++) {
+				int rand_value = (rand() % 20) + 1; // Variable value randomizer
+				int rand_size = (rand() % 7) + 1;   // Variable size randomizer
+				items_value[i] = rand_value;
+				items_size[i] = rand_size;
+				items_value_2[i] = rand_value;
+				items_size_2[i] = rand_size;
+				items_value_3[i] = rand_value;
+				items_size_3[i] = rand_size;
+				printf("%s%d%s%d%s%d\n", "Item ", i, " - Value: ", items_value[i], " / Size: ", items_size[i]);
+			}
+			slideValues(items_value,items_size,6);
+			slideMatematico(items_value,items_size,6);
+			printf("%s\n", "");
+			gettimeofday(&t_ini, NULL);
+			basicGreedy(15, items_value, items_size, 6); // The basic greedy algorithm is execute
+			gettimeofday(&t_fin, NULL);
+			secsGreedy = timeval_diff(&t_fin, &t_ini);
+  			
+
+			gettimeofday(&t_ini, NULL);
+			proportionalGreedy(15, items_value_2, items_size_2, 6); // The proportional greedy algorithm is execute
+			gettimeofday(&t_fin, NULL);
+			secsProGreedy = timeval_diff(&t_fin, &t_ini);
+			
+			gettimeofday(&t_ini, NULL);
+			dinamicProgramming(16, 6, items_value_3, items_size_3); // The dinamic programming algorithm is execute (We pass a value of 16 because we need 0 to 15 rows)
+			gettimeofday(&t_fin, NULL);
+			secsDynamic = timeval_diff(&t_fin, &t_ini);			
+		
+			fprintf(out,"\\end{document}\n");
+			fclose(out);
+			system("pdflatex salida/salida.tex");
+			system("evince salida.pdf");
+				
+		} else if ( ( !(strcmp(argv[1], "-E=")))){
+			int n = atoi(argv[2]);
+			if(n!=0){
+				printf("Modo  Cientifico\n");
+				experimental(n);
+				fprintf(out,"\\end{document}\n");
+				fclose(out);
+				system("pdflatex salida/salida.tex");
+				system("evince salida.pdf");
+
+			}else{
+				printf("Error:Give a correct N argument\n");
+				}
+			
+			
+		} else{
+			printf("Error:Give a correct argument\n");
+		}
+	} else {
+		printf("Error: Please provide the correct argument\n" );
+	}
+	
+	return 0; 
+}
+
