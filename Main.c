@@ -415,6 +415,18 @@ void dinamicProgramming(int m, int n, int items_value[], int items_size[]) {
 }
 
 void experimental(int n){
+    srand(time(NULL));
+    int n_2 = n;
+    int **greedy;
+    greedy = malloc(sizeof(float *) * 10); /* Row pointers */
+    for(int i = 0; i < 10; i++) {
+			greedy[i] = malloc(sizeof(float) * 10);
+    }
+    for (int i = 0; i < 10; i++){
+        for (int j = 0; j < 10; j++){
+            greedy[i][j] = 0;
+        }
+    }
 	while (n > 0) {
 		int bag_size = 100;
 		int number_items = 10;
@@ -499,7 +511,12 @@ void experimental(int n){
 				gettimeofday(&t_fin, NULL);
 				secsDynamic = timeval_diff(&t_fin, &t_ini);
 	  			dinamic_time[i][j] = secsDynamic * 1000.0;
-
+                
+                if (p == z) {
+                    //printf("Valor de greedy = %d\n", greedy[i][j]);
+                    greedy[i][j] += 1;
+                }
+                
 	  			number_items += 10;
 			}
 			number_items = 10;
@@ -528,19 +545,19 @@ void experimental(int n){
 		free(dinamic_value);
 		n -= 1;
 	}
+	printFinalTable(n_2, greedy, 1);
+	for(int i = 0; i < 10; i++) {
+	    	free(greedy[i]);
+    }
+    free(greedy);
 }
 
 int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
-	// for (int i = 0; i < len; i++) {
-	// 	printf("Item %d, Size: %d, Value: %d\n", i, items_size[i], items_value[i]);
-	// }
-	printf("---------------------New round----------------------\n");
 	int bag_value = 0;
 	int temp_higher_value = 0;
 	int temp_size = 0;
 	int temp_index;	
 	bool space_available = true;
-	printf("Bag size: %d, Number items = %d\n", bag_size, len);
 	while (space_available) {
 		space_available = false;
 		for (int i = 0; i < len; i++) {
@@ -556,25 +573,21 @@ int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
 			}
 		}
 		if (space_available == true) {
-			//printf("%s%d%s%d%s%d Added to bag\n", "Item ", temp_index, " - Value: ", items_value[temp_index], " / Size: ", items_size[temp_index]);
 			bag_value += temp_higher_value;
 			bag_size -= temp_size;
 			items_value[temp_index] = 0;
 			temp_higher_value = 0;
 		}	
 	}
-	//printf("Bag value = %d\n", bag_value);
 	return bag_value;
 }
 
 int proportional_exp(int bag_size, int items_value[], int items_size[], int len){
-	//printf("---------------------New round----------------------\n");
 	int bag_value = 0;
 	float temp_higher_proportion = 0;
 	int temp_size = 0;
 	int temp_index;	
 	bool space_available = true;
-	printf("Bag size: %d, Number items = %d\n", bag_size, len);
 	while (space_available) {
 		space_available = false;
 		for (int i = 0; i < len; i++) {
@@ -594,7 +607,6 @@ int proportional_exp(int bag_size, int items_value[], int items_size[], int len)
 			temp_higher_proportion = 0;
 		}	
 	}
-	//printf("Bag value = %d\n", bag_value);
 	return bag_value;
 }
 
@@ -726,10 +738,90 @@ void printTable(int l, double ** c, int ** d){
 				}
 			} else {
 				if(j!=n-1){
-				fprintf(out, " %.16g &", c[i-1][j-1]);		
+				fprintf(out, " %.5g &", c[i-1][j-1]);		
 				}else{
-					fprintf(out, " %.16g ",c[i-1][j-1]);
+					fprintf(out, " %.5g ",c[i-1][j-1]);
 				}
+			}
+		}
+	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+}
+
+void printFinalTable(int runs, int ** c, int l){
+    printf("%d\n", runs);
+    int m = 11;
+    int n = 11;
+    fprintf(out,"\\begin{frame}\n");
+	if (l == 1) {
+		fprintf(out,"\\frametitle{Greedy}\n\n");
+	} else {
+		fprintf(out,"\\frametitle{Proportional}\n\n");
+	}
+	//fprintf(out, "Bagpack final execution times:\n");
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\begin{tabular}{ |");
+	for (int i=0; i < n;i++) {
+		fprintf(out,"c|");
+	}
+	fprintf(out,"}\n");
+ 	fprintf(out,"\\hline\n");
+	for (int i=0; i < m;i++) {
+		for(int j=0; j< n; j++){
+            if (i > 0 && j > 0) {
+//                 float k = c[i-1][j-1] / runs;
+//                 printf("Double - %f\n",k);
+//                 printf("%d / %d\n", c[i-1][j-1], runs);
+//                 printf("Value of greedy[%d][%d] = %f\n", i, j, k);  
+            }
+			if (i == 0) {
+				if (j == 0) {
+					fprintf(out, " %s &", "");
+				} else {
+					if(j!=n-1){
+						fprintf(out, " %d &", j*10);		
+					} else{
+						fprintf(out, " %d ",j*10);
+					}
+				}
+			} else if (j == 0){
+				if(j!=n-1){
+					fprintf(out, " %d &", i*100);		
+				}else{
+					fprintf(out, " %d ",i*100);
+				}
+			} else {
+ 				if(j!=n-1){
+                    if (c[i-1][j-1] == 0) {
+                        fprintf(out, " 0 &");	
+                    } else {
+                        //double k = c[i-1][j-1] / runs;
+                        //printf("greedy[%d][%d] = %d", i, j , k);
+                        fprintf(out, " %d/%d &", c[i-1][j-1], runs);
+                    }
+                     	
+ 				}else{
+                    if (c[i-1][j-1] == 0) {
+                        fprintf(out, " 0 ");	
+                    } else {
+                        //double k = c[i-1][j-1] / runs;
+                        //printf("greedy[%d][%d] = %d", i, j , k);
+                        fprintf(out, " %d/%d ",  c[i-1][j-1], runs);
+                        
+                    }
+				}
+// 				if(j!=n-1){
+//                     fprintf(out, " %d &", c[i-1][j-1]);		
+// 				}else{
+// 					fprintf(out, " %d ",c[i-1][j-1]);
+// 				}
 			}
 		}
 	 	fprintf(out,"\\\\ \n");
