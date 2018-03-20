@@ -421,16 +421,19 @@ void experimental(int n){
     int **prop;
     double **t_greedy;
     double **t_prop;
+    double **t_dinamic;
     greedy = malloc(sizeof(float *) * 10); /* Row pointers */
     prop = malloc(sizeof(float *) * 10);
     t_greedy = (double**) malloc(sizeof(double *) * 10);
     t_prop = (double**) malloc(sizeof(double *) * 10);
+    t_dinamic = (double**) malloc(sizeof(double *) * 10);
 
     for(int i = 0; i < 10; i++) {
 		greedy[i] = malloc(sizeof(float) * 10);
 		prop[i] = malloc(sizeof(float) * 10);
 		t_greedy[i] = (double*) malloc(sizeof(double) * 10); /* Rows */
 		t_prop[i] = (double*) malloc(sizeof(double) * 10); /* Rows */
+		t_dinamic[i] = (double*) malloc(sizeof(double) * 10); /* Rows */
     }
     for (int i = 0; i < 10; i++){
         for (int j = 0; j < 10; j++){
@@ -438,6 +441,7 @@ void experimental(int n){
             prop[i][j] = 0;
             t_greedy[i][j] = 0;
             t_prop[i][j] = 0;
+            t_dinamic[i][j] = 0;
         }
     }
 	while (n > 0) {
@@ -528,6 +532,7 @@ void experimental(int n){
 				gettimeofday(&t_fin, NULL);
 				secsDynamic = timeval_diff(&t_fin, &t_ini);
 	  			//dinamic_time[i][j] = secsDynamic * 1000.0;
+	  			t_dinamic[i][j] += secsDynamic * 1000.0;
                 
                 if (p == z) {
                     greedy[i][j] += 1;
@@ -571,6 +576,7 @@ void experimental(int n){
 	// }
 	printFinalTable2(n_2, t_greedy, 1);
 	printFinalTable2(n_2, t_prop, 2);
+	printFinalTable2(n_2, t_dinamic, 3);
 	printFinalTable(n_2, greedy, 1);
 	printFinalTable(n_2, prop, 2);
 	for(int i = 0; i < 10; i++) {
@@ -578,11 +584,13 @@ void experimental(int n){
 	    	free(prop[i]);
 	    	free(t_greedy[i]);
 	    	free(t_prop[i]);
+	    	free(t_dinamic[i]);
     }
     free(greedy);
     free(prop);
     free(t_greedy);
     free(t_prop);
+    free(t_dinamic);
 }
 
 int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
@@ -828,11 +836,19 @@ void printFinalTable(int runs, int ** c, int l){
  				if(j!=n-1){
                     double k = (double) c[i-1][j-1] / (double) runs;
                     //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
-                    fprintf(out, " %f &", k);
+                    if (k == 0) {
+                    	fprintf(out, "\\textcolor{red}{%f} &", k);
+                    } else {
+                    	fprintf(out, "\\textcolor{green}{%f} &", k);
+                    }
  				} else{
                     double k = (double) c[i-1][j-1] / (double) runs;
                     //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
-                    fprintf(out, " %f ",  k);
+                    if (k == 0) {
+                    	fprintf(out, "\\textcolor{red}{%f} ", k);
+                    } else {
+                    	fprintf(out, "\\textcolor{green}{%f} ", k);
+                    }
 				}
 			}
 		}
