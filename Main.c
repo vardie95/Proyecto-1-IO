@@ -22,7 +22,7 @@ int main(int argc, char *argv[] ){
 	float x = 0 / 2;
 	srand(time(NULL));
 	makeBeamer();
-	if (argc == 2) {
+	if (argc == 2 || argc == 3) {
 		if( ( !(strcmp(argv[1], "x")))) { // If user passes the value x - Experimental mode starts
 			printf("Modo Experimental\n");
 
@@ -74,11 +74,25 @@ int main(int argc, char *argv[] ){
 			secsDynamic = timeval_diff(&t_fin, &t_ini);			
 			printf("\n\n %.16g milisegundos\n", secsDynamic * 1000.0);
 			printTimesPractice(secsGreedy,secsProGreedy,secsDynamic);
-			
+			fprintf(out,"\\end{document}\n");
+			fclose(out);
+			system("pdflatex salida/salida.tex");
+			system("evince salida.pdf");
+				
+		} else if ( ( !(strcmp(argv[1], "-E=")))){
+			int n = atoi(argv[2]);
+			if(n!=0){
+				printf("Modo  Cientifico\n");
+				experimental(n);
+				fprintf(out,"\\end{document}\n");
+				fclose(out);
+				system("pdflatex salida/salida.tex");
+				system("evince salida.pdf");
 
-		} else if ( ( !(strcmp(argv[1], "y")))){
-			printf("Modo  Cientifico\n");
-			experimental(1);
+			}else{
+				printf("Error:Give a correct N argument\n");
+				}
+			
 			
 		} else{
 			printf("Error:Give a correct argument\n");
@@ -86,10 +100,7 @@ int main(int argc, char *argv[] ){
 	} else {
 		printf("Error: Please provide the correct argument\n" );
 	}
-	fprintf(out,"\\end{document}\n");
-	fclose(out);
-	system("pdflatex salida/salida.tex");
-	system("evince salida.pdf");
+	
 	return 0; 
 }
 
@@ -513,19 +524,19 @@ int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
 			}
 		}
 		if (space_available == true) {
-			printf("%s%d%s%d%s%d Added to bag\n", "Item ", temp_index, " - Value: ", items_value[temp_index], " / Size: ", items_size[temp_index]);
+			//printf("%s%d%s%d%s%d Added to bag\n", "Item ", temp_index, " - Value: ", items_value[temp_index], " / Size: ", items_size[temp_index]);
 			bag_value += temp_higher_value;
 			bag_size -= temp_size;
 			items_value[temp_index] = 0;
 			temp_higher_value = 0;
 		}	
 	}
-	printf("Bag value = %d\n", bag_value);
+	//printf("Bag value = %d\n", bag_value);
 	return bag_value;
 }
 
 int proportional_exp(int bag_size, int items_value[], int items_size[], int len){
-	printf("---------------------New round----------------------\n");
+	//printf("---------------------New round----------------------\n");
 	int bag_value = 0;
 	float temp_higher_proportion = 0;
 	int temp_size = 0;
@@ -551,7 +562,7 @@ int proportional_exp(int bag_size, int items_value[], int items_size[], int len)
 			temp_higher_proportion = 0;
 		}	
 	}
-	printf("Bag value = %d\n", bag_value);
+	//printf("Bag value = %d\n", bag_value);
 	return bag_value;
 }
 
