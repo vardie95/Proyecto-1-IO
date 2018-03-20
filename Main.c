@@ -419,50 +419,59 @@ void experimental(int n){
     int n_2 = n;
     int **greedy;
     int **prop;
+    double **t_greedy;
+    double **t_prop;
     greedy = malloc(sizeof(float *) * 10); /* Row pointers */
     prop = malloc(sizeof(float *) * 10);
+    t_greedy = (double**) malloc(sizeof(double *) * 10);
+    t_prop = (double**) malloc(sizeof(double *) * 10);
+
     for(int i = 0; i < 10; i++) {
 		greedy[i] = malloc(sizeof(float) * 10);
 		prop[i] = malloc(sizeof(float) * 10);
+		t_greedy[i] = (double*) malloc(sizeof(double) * 10); /* Rows */
+		t_prop[i] = (double*) malloc(sizeof(double) * 10); /* Rows */
     }
     for (int i = 0; i < 10; i++){
         for (int j = 0; j < 10; j++){
             greedy[i][j] = 0;
             prop[i][j] = 0;
+            t_greedy[i][j] = 0;
+            t_prop[i][j] = 0;
         }
     }
 	while (n > 0) {
 		int bag_size = 100;
 		int number_items = 10;
 
-		double **greedy_time;
-		int **greedy_value;
+		//double **greedy_time;
+		//int **greedy_value;
 
-		double **proportional_time;
-		int **proportional_value;
+		//double **proportional_time;
+		//int **proportional_value;
 
-		double **dinamic_time;
-		int **dinamic_value;
+		//double **dinamic_time;
+		//int **dinamic_value;
 
-		greedy_time = (double**) malloc(sizeof(double *) * 10);
-		greedy_value = malloc(sizeof(float *) * 10); /* Row pointers */
+		//greedy_time = (double**) malloc(sizeof(double *) * 10);
+		//greedy_value = malloc(sizeof(float *) * 10); /* Row pointers */
 
-		proportional_time = (double**) malloc(sizeof(double *) * 10);
-		proportional_value = malloc(sizeof(float *) * 10); /* Row pointers */
+		// proportional_time = (double**) malloc(sizeof(double *) * 10);
+		// proportional_value = malloc(sizeof(float *) * 10);  Row pointers 
 
-		dinamic_time = (double**) malloc(sizeof(double *) * 10);
-		dinamic_value = malloc(sizeof(float *) * 10); /* Row pointers */		
+		// dinamic_time = (double**) malloc(sizeof(double *) * 10);
+		// dinamic_value = malloc(sizeof(float *) * 10); /* Row pointers */		
 
-		for(int i = 0; i < 10; i++) {
-			greedy_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
-			greedy_value[i] = malloc(sizeof(float) * 10);
+		// for(int i = 0; i < 10; i++) {
+		// 	greedy_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+		// 	greedy_value[i] = malloc(sizeof(float) * 10);
 
-			proportional_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
-			proportional_value[i] = malloc(sizeof(float) * 10);
+		// 	proportional_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+		// 	proportional_value[i] = malloc(sizeof(float) * 10);
 
-			dinamic_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
-			dinamic_value[i] = malloc(sizeof(float) * 10);
-		}
+		// 	dinamic_time[i] =  (double*) malloc(sizeof(double) * 10); /* Rows */
+		// 	dinamic_value[i] = malloc(sizeof(float) * 10);
+		// }
 		struct timeval t_ini, t_fin;
 		double secsGreedy;
 		double secsProGreedy;
@@ -499,24 +508,26 @@ void experimental(int n){
 
 				gettimeofday(&t_ini, NULL);
 				int p = greedy_exp(bag_size, values, sizes, number_items); // The basic greedy algorithm is execute
-				greedy_value[i][j] = p;
+				//greedy_value[i][j] = p;
 				gettimeofday(&t_fin, NULL);
 				secsGreedy = timeval_diff(&t_fin, &t_ini);
-	  			greedy_time[i][j] = secsGreedy * 1000.0;
+	  			//greedy_time[i][j] = secsGreedy * 1000.0;
+	  			t_greedy[i][j] += secsGreedy * 1000.0;
 
 	  			gettimeofday(&t_ini, NULL);
 				int q = proportional_exp(bag_size, values_2, sizes_2, number_items); // The proportional greedy algorithm is execute
-				proportional_value[i][j] = q;
+				//proportional_value[i][j] = q;
 				gettimeofday(&t_fin, NULL);
 				secsProGreedy = timeval_diff(&t_fin, &t_ini);
-	  			proportional_time[i][j] = secsProGreedy * 1000.0;
+	  			//proportional_time[i][j] = secsProGreedy * 1000.0;
+	  			t_prop[i][j] += secsProGreedy * 1000.0;
 
 	  			gettimeofday(&t_ini, NULL);
 				int z = dinamic_exp(bag_size, number_items, values_3, sizes_3); // The proportional greedy algorithm is execute
-				dinamic_value[i][j] = z;
+				//dinamic_value[i][j] = z;
 				gettimeofday(&t_fin, NULL);
 				secsDynamic = timeval_diff(&t_fin, &t_ini);
-	  			dinamic_time[i][j] = secsDynamic * 1000.0;
+	  			//dinamic_time[i][j] = secsDynamic * 1000.0;
                 
                 if (p == z) {
                     greedy[i][j] += 1;
@@ -530,37 +541,48 @@ void experimental(int n){
 			number_items = 10;
 			bag_size += 100;
 		}
-		printTable(1, greedy_time, greedy_value);
-		printTable(2, proportional_time, proportional_value);
-		printTable(3, dinamic_time, dinamic_value);
-		for(int i = 0; i < 10; i++) {
-	    	free(greedy_time[i]); /* Rows */
-	    	free(greedy_value[i]);
+		//printTable(1, greedy_time, greedy_value);
+		//printTable(2, proportional_time, proportional_value);
+		//printTable(3, dinamic_time, dinamic_value);
+		// for(int i = 0; i < 10; i++) {
+	 //    	free(greedy_time[i]); /* Rows */
+	 //    	free(greedy_value[i]);
 
-	    	free(proportional_time[i]); /* Rows */
-	    	free(proportional_value[i]);
+	 //    	free(proportional_time[i]); /* Rows */
+	 //    	free(proportional_value[i]);
 
-	    	free(dinamic_time[i]); /* Rows */
-	    	free(dinamic_value[i]);
-		}
-		free(greedy_time); /* Row pointers */
-		free(greedy_value);
+	 //    	free(dinamic_time[i]); /* Rows */
+	 //    	free(dinamic_value[i]);
+		// }
+		//free(greedy_time); /* Row pointers */
+		//free(greedy_value);
 
-		free(proportional_time); /* Row pointers */
-		free(proportional_value);
+		//free(proportional_time); /* Row pointers */
+		//free(proportional_value);
 
-		free(dinamic_time); /* Row pointers */
-		free(dinamic_value);
+		//free(dinamic_time); /* Row pointers */
+		//free(dinamic_value);
 		n -= 1;
 	}
+	// for (int i = 0; i < 10; i++) {
+	// 	for (int j = 0; j < 10; j++) {
+	// 		printf("[%d][%d] - %f\n", i, j, t_greedy[i][j]);
+	// 	}
+	// }
+	printFinalTable2(n_2, t_greedy, 1);
+	printFinalTable2(n_2, t_prop, 2);
 	printFinalTable(n_2, greedy, 1);
 	printFinalTable(n_2, prop, 2);
 	for(int i = 0; i < 10; i++) {
 	    	free(greedy[i]);
 	    	free(prop[i]);
+	    	free(t_greedy[i]);
+	    	free(t_prop[i]);
     }
     free(greedy);
     free(prop);
+    free(t_greedy);
+    free(t_prop);
 }
 
 int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
@@ -805,9 +827,73 @@ void printFinalTable(int runs, int ** c, int l){
 			} else {
  				if(j!=n-1){
                     double k = (double) c[i-1][j-1] / (double) runs;
+                    //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
                     fprintf(out, " %f &", k);
  				} else{
                     double k = (double) c[i-1][j-1] / (double) runs;
+                    //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
+                    fprintf(out, " %f ",  k);
+				}
+			}
+		}
+	 	fprintf(out,"\\\\ \n");
+		fprintf(out,"\\hline\n");
+	}
+	fprintf(out, "\\end{tabular}\n");
+	fprintf(out,"\\end{adjustbox}\n");
+	fprintf(out, "\\end{center}\n\n");
+	fprintf(out,"\\end{frame}\n");
+}
+
+void printFinalTable2(int runs, double ** c, int l){
+    int m = 11;
+    int n = 11;
+    fprintf(out,"\\begin{frame}\n");
+    if (l == 1) {
+    	fprintf(out,"\\frametitle{Greedy Time }\n\n");
+        fprintf(out, "Greedy execution time average\n");
+    } else if (l == 2) {
+		fprintf(out,"\\frametitle{Proportional Time }\n\n");
+        fprintf(out, "Proportional execution time average\n");
+	} else {
+		fprintf(out,"\\frametitle{Dinamic Time }\n\n");
+        fprintf(out, "Dinamic execution time average\n");
+	}
+	fprintf(out,"\\begin{center}\n");
+	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
+	fprintf(out,"\\small\n");
+	fprintf(out,"\\begin{tabular}{ |");
+	for (int i=0; i < n;i++) {
+		fprintf(out,"c|");
+	}
+	fprintf(out,"}\n");
+ 	fprintf(out,"\\hline\n");
+	for (int i=0; i < m;i++) {
+		for(int j=0; j< n; j++){
+			if (i == 0) {
+				if (j == 0) {
+					fprintf(out, " %s &", "");
+				} else {
+					if(j!=n-1){
+						fprintf(out, " %d &", j*10);		
+					} else{
+						fprintf(out, " %d ",j*10);
+					}
+				}
+			} else if (j == 0){
+				if(j!=n-1){
+					fprintf(out, " %d &", i*100);		
+				}else{
+					fprintf(out, " %d ",i*100);
+				}
+			} else {
+ 				if(j!=n-1){
+                    double k = (double) c[i-1][j-1] / (double) runs;
+                    //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
+                    fprintf(out, " %f &", k);
+ 				} else{
+                    double k = (double) c[i-1][j-1] / (double) runs;
+                    //printf("%f, %d, %f\n", (double) c[i-1][j-1], runs, k);
                     fprintf(out, " %f ",  k);
 				}
 			}
