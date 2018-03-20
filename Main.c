@@ -418,13 +418,17 @@ void experimental(int n){
     srand(time(NULL));
     int n_2 = n;
     int **greedy;
+    int **prop;
     greedy = malloc(sizeof(float *) * 10); /* Row pointers */
+    prop = malloc(sizeof(float *) * 10);
     for(int i = 0; i < 10; i++) {
-			greedy[i] = malloc(sizeof(float) * 10);
+		greedy[i] = malloc(sizeof(float) * 10);
+		prop[i] = malloc(sizeof(float) * 10);
     }
     for (int i = 0; i < 10; i++){
         for (int j = 0; j < 10; j++){
             greedy[i][j] = 0;
+            prop[i][j] = 0;
         }
     }
 	while (n > 0) {
@@ -476,7 +480,7 @@ void experimental(int n){
 				int sizes_3[number_items];
 
 				srand(clock());
-				
+
 				for (int k = 0; k < number_items; k++){
 					int rand_value = (rand() % 100) + 1;
 					double max = bag_size * 0.4;
@@ -515,8 +519,10 @@ void experimental(int n){
 	  			dinamic_time[i][j] = secsDynamic * 1000.0;
                 
                 if (p == z) {
-                    //printf("Valor de greedy = %d\n", greedy[i][j]);
                     greedy[i][j] += 1;
+                }
+                if (q == z) {
+                	prop[i][j] += 1;
                 }
                 
 	  			number_items += 10;
@@ -548,10 +554,13 @@ void experimental(int n){
 		n -= 1;
 	}
 	printFinalTable(n_2, greedy, 1);
+	printFinalTable(n_2, prop, 2);
 	for(int i = 0; i < 10; i++) {
 	    	free(greedy[i]);
+	    	free(prop[i]);
     }
     free(greedy);
+    free(prop);
 }
 
 int greedy_exp(int bag_size, int items_value[], int items_size[], int len){
@@ -798,11 +807,8 @@ void printFinalTable(int runs, int ** c, int l){
                     double k = (double) c[i-1][j-1] / (double) runs;
                     fprintf(out, " %f &", k);
  				} else{
-                    if (c[i-1][j-1] == 0) {
-                        double k = (double) c[i-1][j-1] / (double) runs;
-                        fprintf(out, " %f ",  k);
-                        
-                    }
+                    double k = (double) c[i-1][j-1] / (double) runs;
+                    fprintf(out, " %f ",  k);
 				}
 			}
 		}
