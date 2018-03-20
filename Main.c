@@ -475,6 +475,8 @@ void experimental(int n){
 				int values_3[number_items];
 				int sizes_3[number_items];
 
+				srand(clock());
+				
 				for (int k = 0; k < number_items; k++){
 					int rand_value = (rand() % 100) + 1;
 					double max = bag_size * 0.4;
@@ -754,16 +756,16 @@ void printTable(int l, double ** c, int ** d){
 }
 
 void printFinalTable(int runs, int ** c, int l){
-    printf("%d\n", runs);
     int m = 11;
     int n = 11;
     fprintf(out,"\\begin{frame}\n");
 	if (l == 1) {
-		fprintf(out,"\\frametitle{Greedy}\n\n");
+		fprintf(out,"\\frametitle{Greedy optimal }\n\n");
+        fprintf(out, "Percentage of greedy algorithm of being optimal\n");
 	} else {
-		fprintf(out,"\\frametitle{Proportional}\n\n");
+		fprintf(out,"\\frametitle{Proportional optimal }\n\n");
+        fprintf(out, "Percentage of greedy proportional algorithm of being optimal\n");
 	}
-	//fprintf(out, "Bagpack final execution times:\n");
 	fprintf(out,"\\begin{center}\n");
 	fprintf(out,"\\begin{adjustbox}{max width=\\textwidth}\n");
 	fprintf(out,"\\small\n");
@@ -775,12 +777,6 @@ void printFinalTable(int runs, int ** c, int l){
  	fprintf(out,"\\hline\n");
 	for (int i=0; i < m;i++) {
 		for(int j=0; j< n; j++){
-            if (i > 0 && j > 0) {
-//                 float k = c[i-1][j-1] / runs;
-//                 printf("Double - %f\n",k);
-//                 printf("%d / %d\n", c[i-1][j-1], runs);
-//                 printf("Value of greedy[%d][%d] = %f\n", i, j, k);  
-            }
 			if (i == 0) {
 				if (j == 0) {
 					fprintf(out, " %s &", "");
@@ -799,29 +795,15 @@ void printFinalTable(int runs, int ** c, int l){
 				}
 			} else {
  				if(j!=n-1){
+                    double k = (double) c[i-1][j-1] / (double) runs;
+                    fprintf(out, " %f &", k);
+ 				} else{
                     if (c[i-1][j-1] == 0) {
-                        fprintf(out, " 0 &");	
-                    } else {
-                        //double k = c[i-1][j-1] / runs;
-                        //printf("greedy[%d][%d] = %d", i, j , k);
-                        fprintf(out, " %d/%d &", c[i-1][j-1], runs);
-                    }
-                     	
- 				}else{
-                    if (c[i-1][j-1] == 0) {
-                        fprintf(out, " 0 ");	
-                    } else {
-                        //double k = c[i-1][j-1] / runs;
-                        //printf("greedy[%d][%d] = %d", i, j , k);
-                        fprintf(out, " %d/%d ",  c[i-1][j-1], runs);
+                        double k = (double) c[i-1][j-1] / (double) runs;
+                        fprintf(out, " %f ",  k);
                         
                     }
 				}
-// 				if(j!=n-1){
-//                     fprintf(out, " %d &", c[i-1][j-1]);		
-// 				}else{
-// 					fprintf(out, " %d ",c[i-1][j-1]);
-// 				}
 			}
 		}
 	 	fprintf(out,"\\\\ \n");
